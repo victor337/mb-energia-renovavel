@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "631398477296",
+    "firebase_url": "https://mbenergia-a1eef.firebaseio.com",
+    "project_id": "mbenergia-a1eef",
+    "storage_bucket": "mbenergia-a1eef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631398477296:android:51588c57e839a3ef77c135",
+        "android_client_info": {
+          "package_name": "br.com.barbosa.mbenergiarenovavel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "631398477296-9rlae0g1ku7v8n0u7vavbbhsh3a1p5u1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJMRRDTsLzy96NYmmFyRjMMle7eG9VphQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "631398477296-9rlae0g1ku7v8n0u7vavbbhsh3a1p5u1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
