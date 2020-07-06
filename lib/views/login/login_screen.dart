@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mbenergiarenovavel/constants/size_screen.dart';
-import 'package:mbenergiarenovavel/views/login/components/card_fields.dart';
+import 'package:mbenergiarenovavel/controllers/login/login_controller.dart';
+import 'package:mbenergiarenovavel/controllers/user/user_controller.dart';
+import 'package:mbenergiarenovavel/views/login/components/custom_form_field.dart';
 
 
 class LoginScreen extends StatelessWidget {
   
   final SizeScreen sizeScreen = SizeScreen();
+  final FocusNode focusEmail = FocusNode();
+  final FocusNode focusPass = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +46,97 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 55,),
-                CardFields(),
+                GetBuilder<UserController>(
+                  init: UserController(),
+                  builder: (userController){
+                    return Card(
+                      color: const Color.fromARGB(255, 255, 153, 51),
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
+                        width: sizeScreen.getWidthScreen(context),
+                        child: GetBuilder<LoginController>(
+                          init: LoginController(),
+                          builder: (loginController){
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                const SizedBox(height: 15,),
+                                CustomFormField(
+                                  focusNode: focusEmail,
+                                  onChanged: (email){
+                                    loginController.setEmail(email);
+                                  },
+                                  hintText: 'Email',
+                                  onFieldSubmitted: (email){
+                                    focusEmail.unfocus();
+                                    FocusScope.of(context).requestFocus(focusPass);
+                                  },
+                                  enabled: !userController.isLoading,
+                                  textInputAction: TextInputAction.next,
+                                  keyBoardType: TextInputType.emailAddress,
+                                  iconData: Icons.email
+                                ),
+                                CustomFormField(
+                                  focusNode: focusPass,
+                                  onChanged: (pass){
+                                    loginController.setPass(pass);
+                                  },
+                                  hintText: 'Senha',
+                                  onFieldSubmitted: (pass){
+                                    focusPass.unfocus();
+                                  },
+                                  enabled: !userController.isLoading,
+                                  textInputAction: TextInputAction.done,
+                                  keyBoardType: TextInputType.visiblePassword,
+                                  iconData: Icons.email
+                                ),
+                                const SizedBox(height: 20,),
+                                RaisedButton(
+                                  onPressed: userController.isLoading ? null : (){
+                                    userController.login(
+                                      email: loginController.email,
+                                      pass: loginController.pass,
+                                      onSucess: (){
+                                        Get.offNamed('/base');
+                                      },
+                                      onFail: (e){
+                                        Get.snackbar(
+                                          'Erro',
+                                          e,
+                                          backgroundColor: Colors.red
+                                        );
+                                      }
+                                    );
+                                  },
+                                  elevation: 7,
+                                  color: const Color.fromARGB(255, 255, 204, 0),
+                                  disabledColor: const Color.fromARGB(255, 255, 204, 0).withAlpha(90),
+                                  child: Container(
+                                    width: sizeScreen.getWidthScreen(context),
+                                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                    child: userController.isLoading ? const Center(
+                                      child: CircularProgressIndicator(
+                                        valueColor: AlwaysStoppedAnimation(Colors.yellow),
+                                      ),
+                                    ) : Text(
+                                      'Entrar',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),

@@ -32,6 +32,8 @@ dependencies:
   excel: ^1.1.0
   flutter_email_sender: ^3.0.1
   permission_handler: ^4.2.0+hotfix.3
+  firebase_auth: ^0.16.1
+  cloud_firestore: ^0.13.7
 
 dev_dependencies:
   flutter_test:
