@@ -155,11 +155,28 @@ class OrderController extends GetxController {
     });
   }
 
-  bool get powerIsValid => typePower != null && typePower != 'Selecione' &&
-    typeRoof != null && typeRoof != 'Selecione' && optionPositioned != null &&
-    optionPositioned != 'Selecione' && lat != null && lat != '' && long != null && 
-    long != '';
+  bool powerIsValid(){
+    if(typePower != 'Selecione' && typeRoof != 'Selecione'  && 
+    optionPositioned != 'Selecione'  && lat != '' && long != ''){
+      return true;
+    } else if(typePower == 'Solo' && optionPositioned != 'Selecione'){
+       return true;
+     }
+     return false;
+  }
 
-  
+  List<String> imagesAccount = [];
+
+  void addImageAccount(String path){
+    imagesAccount.add(path);
+    update();
+  }
+
+  void removeImageAccount(int index){
+    imagesAccount.removeAt(index);
+    update();
+  }
+
+  bool get accountIsValid => imagesAccount.isNotEmpty;
 
 }

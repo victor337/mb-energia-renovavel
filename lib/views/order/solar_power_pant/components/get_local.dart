@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
 import 'package:mbenergiarenovavel/controllers/order/order_controller.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 
 
 class GetLocal extends StatelessWidget {
@@ -36,21 +35,24 @@ class GetLocal extends StatelessWidget {
                       onFail: (){
                         Get.snackbar(
                           'Erro',
-                          'Não foi possível localizar',
+                          'Não foi possível buscar a localização',
                           backgroundColor: Colors.red
                         );
                       }
                     );
                   },
                   color: const Color.fromARGB(255, 255, 153, 51,),
-                  child: orderController.isLoading ?
-                  const Center(child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation(Colors.orange),
-                  ),) :
-                  const Text(
-                    'Buscar',
-                    style: TextStyle(
-                      color: Colors.white
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    child: orderController.isLoading ? const Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation(Colors.white),
+                      ),
+                    ) : const Text(
+                      'Buscar',
+                      style: TextStyle(
+                        color: Colors.white
+                      ),
                     ),
                   ),
                 ),

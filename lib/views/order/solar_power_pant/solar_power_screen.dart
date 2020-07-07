@@ -4,7 +4,7 @@ import 'package:mbenergiarenovavel/constants/size_screen.dart';
 import 'package:mbenergiarenovavel/controllers/order/order_controller.dart';
 import 'package:mbenergiarenovavel/views/login/components/custom_form_field.dart';
 import 'package:mbenergiarenovavel/common/order/dropdown.dart';
-import 'package:mbenergiarenovavel/views/order/energy_account/eneregy_screen.dart';
+import 'package:mbenergiarenovavel/views/order/photos/main_photos.dart';
 import 'package:mbenergiarenovavel/views/order/solar_power_pant/components/get_local.dart';
 
 
@@ -154,9 +154,9 @@ class SolarPowerScreen extends StatelessWidget {
                     const SizedBox(height: 20,),
                     RaisedButton(
                       color: const Color.fromARGB(255, 255, 153, 51,),
-                      onPressed: orderController.powerIsValid ? (){
+                      onPressed: orderController.powerIsValid() ? (){
                         Get.to(
-                          EnergyScreen(),
+                          MainPhotos(),
                           transition: Transition.rightToLeftWithFade,
                           duration: const Duration(milliseconds: 100)
                         );
@@ -168,7 +168,7 @@ class SolarPowerScreen extends StatelessWidget {
                           'Fotos',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: orderController.powerIsValid ? 
+                            color: orderController.powerIsValid() ? 
                             Colors.white : Colors.black,
                             fontSize: 20
                           ),

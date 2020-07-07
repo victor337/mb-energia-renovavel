@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mbenergiarenovavel/constants/size_screen.dart';
 import 'package:mbenergiarenovavel/controllers/order/order_controller.dart';
+import 'package:mbenergiarenovavel/views/order/checkout/checkout_screen.dart';
+import 'package:mbenergiarenovavel/views/order/photos/components/account_photos.dart';
 
 
-class EnergyScreen extends StatelessWidget {
+class MainPhotos extends StatelessWidget {
 
   final SizeScreen sizeScreen = SizeScreen();
 
@@ -51,8 +53,33 @@ class EnergyScreen extends StatelessWidget {
           child: Center(
             child: GetBuilder<OrderController>(
               builder: (orderController){
-                return ListView.builder(
-                  itemBuilder: null
+                return Column(
+                  children: <Widget>[
+                    AccountPhotos(),
+                    RaisedButton(
+                      color: const Color.fromARGB(255, 255, 153, 51,),
+                      onPressed: orderController.accountIsValid ? (){
+                        Get.to(
+                          CheckoutScreen(),
+                          transition: Transition.rightToLeftWithFade,
+                          duration: const Duration(milliseconds: 100)
+                        );
+                      } : null ,
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                        width: sizeScreen.getWidthScreen(context),
+                        child: Text(
+                          'Fotos',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: orderController.accountIsValid ? 
+                            Colors.white : Colors.black,
+                            fontSize: 20
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 );
               }
             ),
