@@ -75,7 +75,8 @@ class LoginScreen extends StatelessWidget {
                                   enabled: !userController.isLoading,
                                   textInputAction: TextInputAction.next,
                                   keyBoardType: TextInputType.emailAddress,
-                                  iconData: Icons.email
+                                  iconData: Icons.email,
+                                  initalValue: '',
                                 ),
                                 CustomFormField(
                                   focusNode: focusPass,
@@ -89,7 +90,8 @@ class LoginScreen extends StatelessWidget {
                                   enabled: !userController.isLoading,
                                   textInputAction: TextInputAction.done,
                                   keyBoardType: TextInputType.visiblePassword,
-                                  iconData: Icons.email
+                                  iconData: Icons.email,
+                                  initalValue: '',
                                 ),
                                 const SizedBox(height: 20,),
                                 RaisedButton(

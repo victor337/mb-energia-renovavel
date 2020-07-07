@@ -22,11 +22,26 @@ class ClientData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Dados do cliente',
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Container(
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 44, 50, 84),
+                shape: BoxShape.circle
+              ),
+              padding: const EdgeInsets.all(10),
+              height: AppBar().preferredSize.height,
+              child: const FadeInImage(
+                placeholder: AssetImage('assets/transparent.png'),
+                image: AssetImage('assets/icon-mb.png'),
+                fit: BoxFit.contain,
+              ),
+            ),
+          ],
         ),
-        elevation: 0,
         backgroundColor: const Color.fromARGB(255, 255, 153, 51,),
+        elevation: 0,
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -50,15 +65,19 @@ class ClientData extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Container(
-                      height: sizeScreen.getHeightScreen(context) / 7,
-                      child: const FadeInImage(
-                        placeholder: AssetImage('assets/transparent.png'),
-                        image: AssetImage('assets/icon-mb.png'),
-                        fit: BoxFit.contain,
+                    Card(
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
+                        child: const Text(
+                          'Dados do cliente',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 22
+                          ),
+                        ),
                       ),
                     ),
-                    const SizedBox(height: 30,),
+                    const SizedBox(height: 25,),
                     CustomFormField(
                       focusNode: focusName,
                       onChanged: (name){
@@ -69,6 +88,7 @@ class ClientData extends StatelessWidget {
                         focusName.unfocus();
                         FocusScope.of(context).requestFocus(focusCity);
                       },
+                      initalValue: orderController.name??'',
                       textInputAction: TextInputAction.next,
                       keyBoardType: TextInputType.multiline,
                       iconData: Icons.people,
@@ -84,6 +104,7 @@ class ClientData extends StatelessWidget {
                         focusCity.unfocus();
                         FocusScope.of(context).requestFocus(focusPhone);
                       },
+                      initalValue: orderController.city??'',
                       textInputAction: TextInputAction.next,
                       keyBoardType: TextInputType.text,
                       iconData: Icons.location_city,
@@ -99,6 +120,7 @@ class ClientData extends StatelessWidget {
                         focusPhone.unfocus();
                         FocusScope.of(context).requestFocus(focusObs);
                       },
+                      initalValue: orderController.phone??'',
                       textInputAction: TextInputAction.next,
                       inputformatters: [
                         WhitelistingTextInputFormatter.digitsOnly,
@@ -119,6 +141,7 @@ class ClientData extends StatelessWidget {
                         onFieldSubmitted: (obs){
                           focusObs.unfocus();
                         },
+                        initalValue: orderController.observation??'',
                         textInputAction: TextInputAction.done,
                         keyBoardType: TextInputType.multiline,
                         iconData: Icons.list,
@@ -127,8 +150,7 @@ class ClientData extends StatelessWidget {
                     ),
                     const SizedBox(height: 20,),
                     RaisedButton(
-                      color: const Color.fromARGB(255, 255, 204, 0),
-                      disabledColor: const Color.fromARGB(255, 255, 204, 0).withAlpha(90),
+                      color: const Color.fromARGB(255, 255, 153, 51,),
                       onPressed: orderController.clietIsValid ? (){
                         Get.to(
                           LocalData(),
@@ -137,9 +159,16 @@ class ClientData extends StatelessWidget {
                         );
                       } : null ,
                       child: Container(
+                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                         width: sizeScreen.getWidthScreen(context),
-                        child: const Text(
-                          'Dados do local'
+                        child: Text(
+                          'Dados do local',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: orderController.clietIsValid ? 
+                            Colors.white : Colors.black,
+                            fontSize: 20
+                          ),
                         ),
                       ),
                     ),

@@ -15,6 +15,7 @@ class CustomFormField extends StatelessWidget {
   final VoidCallback setObscure;
   final List<TextInputFormatter> inputformatters;
   final bool enabled;
+  final String initalValue;
 
   const CustomFormField(
     {
@@ -26,6 +27,7 @@ class CustomFormField extends StatelessWidget {
       @required this.keyBoardType,
       @required this.iconData,
       @required this.enabled,
+      @required this.initalValue,
       this.obscureText,
       this.setObscure,
       this.inputformatters,
@@ -47,6 +49,7 @@ class CustomFormField extends StatelessWidget {
         onChanged: onChanged,
         onFieldSubmitted: onFieldSubmitted,
         textInputAction: textInputAction,
+        initialValue: initalValue,
         keyboardType: keyBoardType,
         obscureText: false,
         style: TextStyle(

@@ -31,11 +31,13 @@ dependencies:
   get: ^3.2.2
   excel: ^1.1.0
   flutter_email_sender: ^3.0.1
+  location: ^3.0.2
   permission_handler: ^4.2.0+hotfix.3
   firebase_auth: ^0.16.1
   cloud_firestore: ^0.13.7
   brasil_fields: ^0.3.0
-
+  
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

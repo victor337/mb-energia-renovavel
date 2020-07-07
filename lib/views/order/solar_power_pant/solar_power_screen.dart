@@ -4,24 +4,19 @@ import 'package:mbenergiarenovavel/constants/size_screen.dart';
 import 'package:mbenergiarenovavel/controllers/order/order_controller.dart';
 import 'package:mbenergiarenovavel/views/login/components/custom_form_field.dart';
 import 'package:mbenergiarenovavel/common/order/dropdown.dart';
-import 'package:mbenergiarenovavel/views/order/solar_power_pant/solar_power_screen.dart';
+import 'package:mbenergiarenovavel/views/order/solar_power_pant/components/get_local.dart';
 
 
-class LocalData extends StatelessWidget {
+class SolarPowerScreen extends StatelessWidget {
 
   final SizeScreen sizeScreen = SizeScreen();
 
-  final FocusNode focusDis= FocusNode();
+  final List<String> optionsType = ['Selecione', 'Solo', 'Telhado'];
+  final List<String> optionRoof = ['Selecione', 'Metálico', 'Colonial', 'Eternit'];
+  final List<String> optionsPostion = ['Selecione', 'Norte', 'Sul', 'Leste', 'Oeste'];
+
+  final FocusNode focusMeters = FocusNode();
   final FocusNode focusObs = FocusNode();
-
-  final List<String> optionsType = 
-    ['Selecione', 'Industria', 'Empresa', 'Residência', 'Granja', 'Sítio', 'Fazenda;'];
-
-  final List<String> optionsLigation = 
-    ['Selecione', 'Mono', 'Bifásico', 'Trifásico', 'Grupo A'];
-  
-  final List<String> optionsGenerator = 
-    ['Selecione', 'Sim', 'Não',];
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +69,7 @@ class LocalData extends StatelessWidget {
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
                         child: const Text(
-                          'Dados do local',
+                          'Dados da Usina Solar',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 22
@@ -87,37 +82,40 @@ class LocalData extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
                         DropDown(
-                          title: 'Tipo',
+                          title: 'Solo/Telhado',
                           options: optionsType,
-                          onChanged: orderController.setType,
-                          value: orderController.type??'Selecione',
+                          onChanged: orderController.setTypePower,
+                          value: orderController.typePower??'Selecione',
+                        ),
+                        Visibility(
+                          child: DropDown(
+                            title: 'Tipo do Telhado',
+                            options: optionRoof,
+                            onChanged: orderController.setTypeRoof,
+                            value: orderController.typeRoof??'Selecione',
+                          ),
                         ),
                         DropDown(
-                          title: 'Ligação',
-                          options: optionsLigation,
-                          onChanged: orderController.setLigation,
-                          value: orderController.ligation??'Selecione',
-                        ),
-                        DropDown(
-                          title: 'Gerador',
-                          options: optionsGenerator,
-                          onChanged: orderController.setGenerator,
-                          value: orderController.generator??'Selecione',
+                          title: 'Posição',
+                          options: optionsPostion,
+                          onChanged: orderController.setOptionPositioned,
+                          value: orderController.optionPositioned??'Selecione',
                         ),
                       ],
                     ),
                     const SizedBox(height: 25,),
+                    GetLocal(),
                     CustomFormField(
-                      focusNode: focusDis,
-                      onChanged: (dis){
-                        orderController.setDis(dis);
+                      focusNode: focusMeters,
+                      onChanged: (meters){
+                        orderController.setDis(meters);
                       },
-                      hintText: 'Disjutor',
-                      onFieldSubmitted: (dis){
-                        focusDis.unfocus();
+                      hintText: 'M²',
+                      onFieldSubmitted: (meters){
+                        focusMeters.unfocus();
                         FocusScope.of(context).requestFocus(focusObs);
                       },
-                      initalValue: orderController.disjutor??'',
+                      initalValue: orderController.meters??'',
                       textInputAction: TextInputAction.next,
                       keyBoardType: TextInputType.text,
                       iconData: Icons.settings,
@@ -128,13 +126,13 @@ class LocalData extends StatelessWidget {
                       child: CustomFormField(
                         focusNode: focusObs,
                         onChanged: (obs){
-                          orderController.setObsLocal(obs);
+                          orderController.setObsPower(obs);
                         },
                         hintText: 'Observação',
                         onFieldSubmitted: (obs){
                           focusObs.unfocus();
                         },
-                        initalValue: orderController.observationLocal??'',
+                        initalValue: orderController.observationPower??'',
                         textInputAction: TextInputAction.done,
                         keyBoardType: TextInputType.multiline,
                         iconData: Icons.list,
@@ -144,21 +142,17 @@ class LocalData extends StatelessWidget {
                     const SizedBox(height: 20,),
                     RaisedButton(
                       color: const Color.fromARGB(255, 255, 153, 51,),
-                      onPressed: orderController.localIsValid ? (){
-                        Get.to(
-                          SolarPowerScreen(),
-                          transition: Transition.rightToLeftWithFade,
-                          duration: const Duration(milliseconds: 100)
-                        );
+                      onPressed: orderController.powerIsValid ? (){
+                        
                       } : null ,
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                         width: sizeScreen.getWidthScreen(context),
                         child: Text(
-                          'Dados da Usina solar',
+                          'Fotos',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: orderController.localIsValid ? 
+                            color: orderController.powerIsValid ? 
                             Colors.white : Colors.black,
                             fontSize: 20
                           ),
