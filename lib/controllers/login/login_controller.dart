@@ -3,12 +3,6 @@ import 'package:get/get.dart';
 
 class LoginController extends GetxController {
 
-  String name;
-  void setName(String setName){
-    name = setName;
-    update();
-  }
-
   String email;
   void setEmail(String setEmail){
     email = setEmail;
@@ -20,5 +14,9 @@ class LoginController extends GetxController {
     pass = setPass;
     update();
   }
+
+
+  bool get isValid => email != null && email != '' &&
+    pass != null && pass != '' && pass.length >= 6;
 
 }

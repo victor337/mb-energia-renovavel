@@ -16,7 +16,7 @@ class DrawerOption extends StatelessWidget {
       builder: (baseController){
         return Container(
           color: baseController.page == drawerOptionModel.page ?
-          const Color.fromARGB(150, 255, 255, 255) : Colors.transparent,
+          const Color.fromARGB(200, 255, 255, 255) : Colors.transparent,
           child: ListTile(
             onTap: (){
               baseController.setPage(drawerOptionModel.page);
@@ -28,10 +28,16 @@ class DrawerOption extends StatelessWidget {
                 Theme.of(context).primaryColor : Colors.white
               ),
             ),
+            leading: Icon(
+              drawerOptionModel.iconData,
+              color: baseController.page == drawerOptionModel.page ?
+                Theme.of(context).primaryColor : Colors.white
+            ),
             trailing: Icon(
               Icons.arrow_right,
-              color: Colors.white,
-            )
+              color: baseController.page == drawerOptionModel.page ?
+                Theme.of(context).primaryColor : Colors.white
+            ),
           ),
         );
       },

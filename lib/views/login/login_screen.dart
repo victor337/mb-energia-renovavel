@@ -93,7 +93,8 @@ class LoginScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 20,),
                                 RaisedButton(
-                                  onPressed: userController.isLoading ? null : (){
+                                  onPressed: userController.isLoading ||
+                                  !loginController.isValid ? null : (){
                                     userController.login(
                                       email: loginController.email,
                                       pass: loginController.pass,
@@ -109,7 +110,7 @@ class LoginScreen extends StatelessWidget {
                                       }
                                     );
                                   },
-                                  elevation: 7,
+                                  elevation: 4,
                                   color: const Color.fromARGB(255, 255, 204, 0),
                                   disabledColor: const Color.fromARGB(255, 255, 204, 0).withAlpha(90),
                                   child: Container(
@@ -119,7 +120,7 @@ class LoginScreen extends StatelessWidget {
                                       child: CircularProgressIndicator(
                                         valueColor: AlwaysStoppedAnimation(Colors.yellow),
                                       ),
-                                    ) : Text(
+                                    ) : const Text(
                                       'Entrar',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(

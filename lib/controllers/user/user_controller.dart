@@ -35,13 +35,8 @@ class UserController extends GetxController {
         name: dataFire.data["name"] as String,
         email: dataFire.data["email"] as String,
       );
-
-      print(dataFire.data);
-      print(setUser.name);
       
       user = setUser;
-      print(user.name);
-
       onSucess();
       isLoading = false;
       update();

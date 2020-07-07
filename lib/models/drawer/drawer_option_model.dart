@@ -1,8 +1,12 @@
+import 'package:flutter/material.dart';
+
+
 class DrawerOptionModel {
 
   String title;
+  IconData iconData;
   int page;
 
-  DrawerOptionModel(this.title, this.page);
+  DrawerOptionModel(this.iconData, this.title, this.page);
 
 }

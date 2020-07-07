@@ -10,42 +10,62 @@ class CustomDrawer extends GetView {
   final SizeScreen sizeScreen = SizeScreen();
 
   final List<DrawerOptionModel> orders = [
-    DrawerOptionModel('Listar OS', 0),
-    DrawerOptionModel('Perfil', 1),
+    DrawerOptionModel(Icons.home, 'Início', 0),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
+      child: Column(
         children: <Widget>[
           Container(
             color: Theme.of(context).primaryColor,
-            padding: const EdgeInsets.fromLTRB(20, 40, 10, 40),
+            padding: const EdgeInsets.fromLTRB(20, 40, 20, 40),
             width: sizeScreen.getWidthScreen(context),
             child: GetBuilder<UserController>(
               builder: (userController){
-                print(userController.user);
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
-                      userController.user.name,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 25
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          userController.user.name,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 25
+                          ),
+                        ),
+                        Text(
+                          userController.user.email,
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 18
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      userController.user.email,
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 18
+                    Container(
+                      height: sizeScreen.getHeightScreen(context) / 10,
+                      width: sizeScreen.getWidthScreen(context) / 3,
+                      child: const FadeInImage(
+                        placeholder: AssetImage('assets/transparent.png'),
+                        image: AssetImage('assets/icon-mb.png'),
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ],
                 );
               },
+            ),
+          ),
+          Expanded(
+            child: Container(
+              color: const Color.fromARGB(255, 0, 204, 255),
+              child: Column(
+                children: orders.map((e) => DrawerOption(e)).toList(),
+              ),
             ),
           ),
         ],
