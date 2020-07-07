@@ -9,6 +9,10 @@ import 'package:permission_handler/permission_handler.dart';
 
 
 class AddTileWidget extends StatelessWidget {
+
+  final Function(String) addImage;
+  const AddTileWidget({@required this.addImage});
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<OrderController>(
@@ -86,7 +90,7 @@ class AddTileWidget extends StatelessWidget {
                           final File file = File(pickedFile.path);
                           final bool sucess = await GallerySaver.saveImage(file.path);
                           if(sucess){
-                            orderController.addImageAccount(file.path);
+                            addImage(file.path);
                           } else {
                             Get.snackbar(
                               'Erro',
@@ -157,9 +161,10 @@ class AddTileWidget extends StatelessWidget {
                             );
                             return;
                           }
-                          final bool sucess = await GallerySaver.saveImage(pickedFile.path);
+                          final File file = File(pickedFile.path);
+                          final bool sucess = await GallerySaver.saveImage(file.path);
                           if(sucess){
-                            orderController.addImageAccount(pickedFile.path);
+                            addImage(file.path);
                           } else {
                             Get.snackbar('Erro', 'Não foi possível salvar');
                           }
@@ -173,7 +178,7 @@ class AddTileWidget extends StatelessWidget {
           },
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.yellow,
+              color: const Color.fromARGB(230, 255, 153, 51,),
               borderRadius: BorderRadius.circular(10)
             ),
             child: Icon(Icons.add, color: Colors.white,),

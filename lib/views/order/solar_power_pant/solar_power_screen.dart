@@ -61,6 +61,7 @@ class SolarPowerScreen extends StatelessWidget {
           ),
           child: Center(
             child: GetBuilder<OrderController>(
+              init: OrderController(),
               builder: (orderController){
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -154,7 +155,7 @@ class SolarPowerScreen extends StatelessWidget {
                     const SizedBox(height: 20,),
                     RaisedButton(
                       color: const Color.fromARGB(255, 255, 153, 51,),
-                      onPressed: orderController.powerIsValid() ? (){
+                      onPressed: orderController.powerIsValid ? (){
                         Get.to(
                           MainPhotos(),
                           transition: Transition.rightToLeftWithFade,
@@ -168,7 +169,7 @@ class SolarPowerScreen extends StatelessWidget {
                           'Fotos',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: orderController.powerIsValid() ? 
+                            color: orderController.powerIsValid ? 
                             Colors.white : Colors.black,
                             fontSize: 20
                           ),

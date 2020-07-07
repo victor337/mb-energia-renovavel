@@ -155,15 +155,11 @@ class OrderController extends GetxController {
     });
   }
 
-  bool powerIsValid(){
-    if(typePower != 'Selecione' && typeRoof != 'Selecione'  && 
-    optionPositioned != 'Selecione'  && lat != '' && long != ''){
-      return true;
-    } else if(typePower == 'Solo' && optionPositioned != 'Selecione'){
-       return true;
-     }
-     return false;
-  }
+  bool get powerIsValid => typePower != 'Selecione' &&  optionPositioned != 'Selecione' &&
+  lat != null && long != null && typePower != null &&  optionPositioned != null ||
+  typePower == 'Telhado' && typeRoof != 'Selecione' && optionPositioned != 'Selecione' &&
+  typePower == null && typeRoof != null && optionPositioned != null;
+
 
   List<String> imagesAccount = [];
 
@@ -177,6 +173,18 @@ class OrderController extends GetxController {
     update();
   }
 
-  bool get accountIsValid => imagesAccount.isNotEmpty;
+  List<String> imagesDisjuntor = [];
+
+  void addImageDisjuntor(String path){
+    imagesDisjuntor.add(path);
+    update();
+  }
+
+  void removeImageDisjuntor(int index){
+    imagesDisjuntor.removeAt(index);
+    update();
+  }
+
+  bool get accountIsValid => imagesAccount.isNotEmpty && imagesDisjuntor.isNotEmpty;
 
 }

@@ -4,6 +4,7 @@ import 'package:mbenergiarenovavel/constants/size_screen.dart';
 import 'package:mbenergiarenovavel/controllers/order/order_controller.dart';
 import 'package:mbenergiarenovavel/views/order/checkout/checkout_screen.dart';
 import 'package:mbenergiarenovavel/views/order/photos/components/account_photos.dart';
+import 'package:mbenergiarenovavel/views/order/photos/components/disjuntor_screen.dart';
 
 
 class MainPhotos extends StatelessWidget {
@@ -53,30 +54,46 @@ class MainPhotos extends StatelessWidget {
           child: Center(
             child: GetBuilder<OrderController>(
               builder: (orderController){
-                return Column(
+                return Stack(
                   children: <Widget>[
-                    AccountPhotos(),
-                    RaisedButton(
-                      color: const Color.fromARGB(255, 255, 153, 51,),
-                      onPressed: orderController.accountIsValid ? (){
-                        Get.to(
-                          CheckoutScreen(),
-                          transition: Transition.rightToLeftWithFade,
-                          duration: const Duration(milliseconds: 100)
-                        );
-                      } : null ,
-                      child: Container(
-                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                        width: sizeScreen.getWidthScreen(context),
-                        child: Text(
-                          'Fotos',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: orderController.accountIsValid ? 
-                            Colors.white : Colors.black,
-                            fontSize: 20
+                     PageView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: <Widget>[
+                        AccountPhotos(),
+                        DisjuntorPhotos(),
+                      ],
+                    ),
+                    Container(
+                      height: sizeScreen.getHeightScreenWidthAppBar(context, AppBar()),
+                      width: sizeScreen.getWidthScreen(context),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          RaisedButton(
+                            color: const Color.fromARGB(255, 255, 153, 51,),
+                            onPressed: orderController.accountIsValid ? (){
+                              Get.to(
+                                CheckoutScreen(),
+                                transition: Transition.rightToLeftWithFade,
+                                duration: const Duration(milliseconds: 100)
+                              );
+                            } : null ,
+                            child: Container(
+                              padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                              width: sizeScreen.getWidthScreen(context),
+                              child: Text(
+                                'Continuar',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: orderController.accountIsValid ? 
+                                  Colors.white : Colors.black,
+                                  fontSize: 20
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ),
                   ],

@@ -25,7 +25,7 @@ class AccountPhotos extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 25,),
+            const SizedBox(height: 10,),
             StaggeredGridView.countBuilder(
               padding: EdgeInsets.zero,
               shrinkWrap: true,
@@ -33,9 +33,19 @@ class AccountPhotos extends StatelessWidget {
               itemCount: orderController.imagesAccount.length + 1,
               itemBuilder: (ctx, index){
                 if(index < orderController.imagesAccount.length){
-                  return ListImages(orderController.imagesAccount[index], index);
+                  return ListImages(
+                    path: orderController.imagesAccount[index],
+                    index: index,
+                    remove: (indexPhoto){
+                      orderController.removeImageAccount(indexPhoto);
+                    }
+                  );
                 } else{
-                  return AddTileWidget();
+                  return AddTileWidget(
+                    addImage: (path){
+                      orderController.addImageAccount(path);
+                    },
+                  );
                 }
               },
               staggeredTileBuilder: (index){

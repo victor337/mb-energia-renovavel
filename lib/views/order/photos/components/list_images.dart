@@ -7,7 +7,13 @@ class ListImages extends StatelessWidget {
 
   final String path;
   final int index;
-  const ListImages(this.path, this.index);
+  final Function(int) remove;
+
+  const ListImages({
+    @required this.path,
+    @required this.index,
+    @required this.remove,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +37,7 @@ class ListImages extends StatelessWidget {
                   ),
                   FlatButton(
                     onPressed: (){
-                      orderController.removeImageAccount(index);
+                      remove(index);
                       Navigator.of(context).pop();
                     },
                     child: Text(
