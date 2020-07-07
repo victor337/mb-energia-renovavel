@@ -116,7 +116,7 @@ class OrderController extends GetxController {
     @required Function onFail
   })async{
 
-    isLoading = false;
+    isLoading = true;
     update();
 
     final Location location =  Location();

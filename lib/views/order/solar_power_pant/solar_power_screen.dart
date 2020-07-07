@@ -4,6 +4,7 @@ import 'package:mbenergiarenovavel/constants/size_screen.dart';
 import 'package:mbenergiarenovavel/controllers/order/order_controller.dart';
 import 'package:mbenergiarenovavel/views/login/components/custom_form_field.dart';
 import 'package:mbenergiarenovavel/common/order/dropdown.dart';
+import 'package:mbenergiarenovavel/views/order/energy_account/eneregy_screen.dart';
 import 'package:mbenergiarenovavel/views/order/solar_power_pant/components/get_local.dart';
 
 
@@ -78,33 +79,44 @@ class SolarPowerScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 25,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        DropDown(
-                          title: 'Solo/Telhado',
-                          options: optionsType,
-                          onChanged: orderController.setTypePower,
-                          value: orderController.typePower??'Selecione',
-                        ),
-                        Visibility(
-                          child: DropDown(
-                            title: 'Tipo do Telhado',
-                            options: optionRoof,
-                            onChanged: orderController.setTypeRoof,
-                            value: orderController.typeRoof??'Selecione',
-                          ),
-                        ),
-                        DropDown(
-                          title: 'Posição',
-                          options: optionsPostion,
-                          onChanged: orderController.setOptionPositioned,
-                          value: orderController.optionPositioned??'Selecione',
-                        ),
-                      ],
+                    GetBuilder<OrderController>(
+                      init: OrderController(),
+                      builder: (orderController){
+                        return Column(
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: <Widget>[
+                                DropDown(
+                                  title: 'Solo/Telhado',
+                                  options: optionsType,
+                                  onChanged: orderController.setTypePower,
+                                  value: orderController.typePower??'Selecione',
+                                ),
+                                Visibility(
+                                  visible: orderController.typePower == 'Telhado',
+                                  child: DropDown(
+                                    title: 'Tipo do Telhado',
+                                    options: optionRoof,
+                                    onChanged: orderController.setTypeRoof,
+                                    value: orderController.typeRoof??'Selecione',
+                                  ),
+                                ),
+                                DropDown(
+                                  title: 'Posição',
+                                  options: optionsPostion,
+                                  onChanged: orderController.setOptionPositioned,
+                                  value: orderController.optionPositioned??'Selecione',
+                                ),
+                              ],
+                            ),
+                          ],
+                        );
+                      },
                     ),
                     const SizedBox(height: 25,),
                     GetLocal(),
+                    const SizedBox(height: 25,),
                     CustomFormField(
                       focusNode: focusMeters,
                       onChanged: (meters){
@@ -117,7 +129,7 @@ class SolarPowerScreen extends StatelessWidget {
                       },
                       initalValue: orderController.meters??'',
                       textInputAction: TextInputAction.next,
-                      keyBoardType: TextInputType.text,
+                      keyBoardType: TextInputType.number,
                       iconData: Icons.settings,
                       enabled: null
                     ),
@@ -143,7 +155,11 @@ class SolarPowerScreen extends StatelessWidget {
                     RaisedButton(
                       color: const Color.fromARGB(255, 255, 153, 51,),
                       onPressed: orderController.powerIsValid ? (){
-                        
+                        Get.to(
+                          EnergyScreen(),
+                          transition: Transition.rightToLeftWithFade,
+                          duration: const Duration(milliseconds: 100)
+                        );
                       } : null ,
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
