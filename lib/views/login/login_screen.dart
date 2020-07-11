@@ -110,7 +110,8 @@ class LoginScreen extends StatelessWidget {
                                         Get.snackbar(
                                           'Erro',
                                           errors.setError(e),
-                                          backgroundColor: Colors.red
+                                          backgroundColor: Colors.red,
+                                          colorText: Colors.white
                                         );
                                       }
                                     );

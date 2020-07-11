@@ -7,6 +7,7 @@ import 'package:mbenergiarenovavel/views/order/photos/components/disjuntor_scree
 import 'package:mbenergiarenovavel/views/order/photos/components/entry_photos.dart';
 import 'package:mbenergiarenovavel/views/order/photos/components/inversor_photos.dart';
 import 'package:mbenergiarenovavel/views/order/photos/components/plates_photos.dart';
+import 'package:mbenergiarenovavel/views/revision/revision_screen.dart';
 
 
 class MainPhotos extends StatefulWidget {
@@ -84,39 +85,35 @@ class _MainPhotosState extends State<MainPhotos> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
+                          Visibility(
+                            visible: orderController.imageisLoading,
+                            child: LinearProgressIndicator(
+                              backgroundColor: Colors.orange,
+                              valueColor: const AlwaysStoppedAnimation(Colors.white),
+                            ),
+                          ),
                           Row(
                             children: <Widget>[
                               Expanded(
                                 child: Visibility(
                                   visible: orderController.index > 0,
-                                  child: Column(
-                                    children: <Widget>[
-                                      Visibility(
-                                        visible: orderController.imageisLoading,
-                                        child: LinearProgressIndicator(
-                                          valueColor: AlwaysStoppedAnimation(Colors.green),
+                                  child: RaisedButton(
+                                    color: const Color.fromARGB(255, 255, 153, 51,),
+                                    onPressed: (){
+                                      orderController.setPage(orderController.index - 1);
+                                    },
+                                    child: Container(
+                                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                      width: sizeScreen.getWidthScreen(context),
+                                      child: const Text(
+                                        'Voltar',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20
                                         ),
                                       ),
-                                      RaisedButton(
-                                        color: const Color.fromARGB(255, 255, 153, 51,),
-                                        onPressed: (){
-                                          orderController.setPage(orderController.index - 1);
-                                        },
-                                        child: Container(
-                                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                                          width: sizeScreen.getWidthScreen(context),
-                                          child: Text(
-                                            'Voltar',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: orderController.accountIsValid() ? 
-                                              Colors.white : Colors.black,
-                                              fontSize: 20
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -136,13 +133,15 @@ class _MainPhotosState extends State<MainPhotos> {
                                     }
                                     else if(orderController.index == 3){
                                       orderController.setPage(4);
+                                    } else if(orderController.index == 4){
+                                      Get.to(RevisionScreen());
                                     }
                                   } : null ,
                                   child: Container(
                                     padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                                     width: sizeScreen.getWidthScreen(context),
                                     child: Text(
-                                      'Continuar',
+                                      orderController.index < 4 ? 'Continuar' : 'Revisar',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: orderController.accountIsValid() ? 

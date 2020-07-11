@@ -17,7 +17,7 @@ class PlatesPhotos extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
                 child: const Text(
-                  'Inversor',
+                  'Placas',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 22
@@ -37,13 +37,13 @@ class PlatesPhotos extends StatelessWidget {
                     path: orderController.platePhotos[index],
                     index: index,
                     remove: (indexPhoto){
-                      orderController.removeImageAccount(indexPhoto);
+                      orderController.removePlatePhotos(indexPhoto);
                     }
                   );
                 } else{
                   return AddTileWidget(
                     addImage: (path){
-                      orderController.addImageAccount(path);
+                      orderController.addPlatePhotos(path);
                     },
                   );
                 }

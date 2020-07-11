@@ -113,7 +113,12 @@ class OrderController extends GetxController {
   }
 
   bool isLoading = false;
+  
   bool imageisLoading = false;
+  void setLoadingImages(){
+    imageisLoading = !imageisLoading;
+    update();
+  }
 
   Future<void> getLocal({
     @required Function onFail
@@ -167,10 +172,7 @@ class OrderController extends GetxController {
   List<File> imagesAccount = [];
 
   void addImageAccount(File path){
-    imageisLoading = true;
-    update();
     imagesAccount.add(path);
-    imageisLoading = false;
     update();
   }
 
@@ -182,10 +184,7 @@ class OrderController extends GetxController {
   List<File> imagesDisjuntor = [];
 
   void addImageDisjuntor(File path){
-    imageisLoading = true;
-    update();
     imagesDisjuntor.add(path);
-    imageisLoading = false;
     update();
   }
 
@@ -197,10 +196,7 @@ class OrderController extends GetxController {
   List<File> imagesEntry = [];
 
   void addImagesEntry(File path){
-    imageisLoading = true;
-    update();
     imagesEntry.add(path);
-    imageisLoading = false;
     update();
   }
 
@@ -212,10 +208,7 @@ class OrderController extends GetxController {
   List<File> inversorPhotos = [];
 
   void addinversorPhotos(File path){
-    imageisLoading = true;
-    update();
     inversorPhotos.add(path);
-    imageisLoading = false;
     update();
   }
 
@@ -227,10 +220,7 @@ class OrderController extends GetxController {
   List<File> platePhotos = [];
 
   void addPlatePhotos(File path){
-    imageisLoading = true;
-    update();
     platePhotos.add(path);
-    imageisLoading = false;
     update();
   }
 

@@ -15,6 +15,89 @@ class AddTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    Future<void> saveImage(int font)async{
+
+      await PermissionHandler().requestPermissions([
+        PermissionGroup.camera,
+        PermissionGroup.storage,
+      ]);
+
+      final PermissionStatus permissionStorage = await PermissionHandler()
+        .checkPermissionStatus(PermissionGroup.storage);
+      
+      final PermissionStatus permissionCamera = await PermissionHandler()
+        .checkPermissionStatus(PermissionGroup.camera,);
+
+      if(permissionStorage != PermissionStatus.granted||
+        permissionCamera != PermissionStatus.granted){
+          showDialog(
+            context: context,
+            child: AlertDialog(
+              content: const Text(
+                'É necessário permissão para tirar/escolher as fotos'
+              ),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: (){
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Ok'),
+                ),
+              ],
+            )
+          );
+          return;
+      } else {
+        final picker = ImagePicker();
+
+        PickedFile pickedFile;
+
+        if(font == 1){
+          pickedFile = await picker.getImage(
+            source: ImageSource.camera, imageQuality: 40
+          );
+        } else {
+          pickedFile = await picker.getImage(
+            source: ImageSource.gallery, imageQuality: 40
+          );
+        }
+        
+        if(pickedFile == null){
+          showDialog(
+            context: context,
+            child: AlertDialog(
+              content: const Text(
+                'Nenhuma imagem selecionada'
+              ),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: (){
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Ok'),
+                ),
+              ],
+            )
+          );
+          return;
+        }
+        final File file = File(pickedFile.path);
+        final bool sucess = await GallerySaver.saveImage(file.path);
+        if(sucess){
+          addImage(file);
+        } else {
+          Get.snackbar(
+            'Erro',
+            'Não foi possível salvar a imagem',
+            backgroundColor: Colors.red
+          );
+        }
+        
+      }
+
+    }
+
     return GetBuilder<OrderController>(
       init: OrderController(),
       builder: (orderController){
@@ -31,144 +114,19 @@ class AddTileWidget extends StatelessWidget {
                     IconButton(
                       icon: Icon(Icons.photo_camera),
                       onPressed: ()async{
-
-                        await PermissionHandler().requestPermissions([
-                          PermissionGroup.camera,
-                          PermissionGroup.storage,
-                        ]);
-
-                        final PermissionStatus permissionStorage = await PermissionHandler()
-                          .checkPermissionStatus(PermissionGroup.storage);
-                        
-                        final PermissionStatus permissionCamera = await PermissionHandler()
-                          .checkPermissionStatus(PermissionGroup.camera);
-
-                        if(permissionStorage != PermissionStatus.granted||
-                          permissionCamera != PermissionStatus.granted){
-                            showDialog(
-                              context: context,
-                              child: AlertDialog(
-                                content: const Text(
-                                  'Permita para poder tirar a foto'
-                                ),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    onPressed: (){
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: const Text('Ok'),
-                                  ),
-                                ],
-                              )
-                            );
-                            return;
-                        } else {
-                          Navigator.of(context).pop();
-                          final picker = ImagePicker();
-
-                          final PickedFile pickedFile = 
-                          await picker.getImage(source: ImageSource.camera);
-                          if(pickedFile == null){
-                            showDialog(
-                              context: context,
-                              child: AlertDialog(
-                                content: const Text(
-                                  'Nenhuma imagem selecionada'
-                                ),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    onPressed: (){
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: const Text('Ok'),
-                                  ),
-                                ],
-                              )
-                            );
-                            return;
-                          }
-                          final File file = File(pickedFile.path);
-                          final bool sucess = await GallerySaver.saveImage(file.path);
-                          if(sucess){
-                            addImage(file);
-                          } else {
-                            Get.snackbar(
-                              'Erro',
-                              'Não foi possível salvar a imagem',
-                              backgroundColor: Colors.red
-                            );
-                          }
-                          
-                        }
+                        Navigator.of(context).pop();
+                        orderController.setLoadingImages();
+                        await saveImage(1);
+                        orderController.setLoadingImages();
                       },
                     ),
                     IconButton(
                       icon: Icon(Icons.photo_album),
                       onPressed: ()async{
-                        
-                        await PermissionHandler().requestPermissions([
-                          PermissionGroup.camera,
-                          PermissionGroup.storage,
-                        ]);
-
-                        final PermissionStatus permissionStorage = await PermissionHandler()
-                          .checkPermissionStatus(PermissionGroup.storage);
-                        
-                        final PermissionStatus permissionCamera = await PermissionHandler()
-                          .checkPermissionStatus(PermissionGroup.camera);
-
-                        if(permissionStorage != PermissionStatus.granted||
-                          permissionCamera != PermissionStatus.granted){
-                          showDialog(
-                            context: context,
-                            child: AlertDialog(
-                              content: const Text(
-                                'Permita para poder tirar a foto'
-                              ),
-                              actions: <Widget>[
-                                FlatButton(
-                                  onPressed: (){
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text('Ok'),
-                                ),
-                              ],
-                            )
-                          );
-                          return;
-                        } else {
-                          Navigator.of(context).pop();
-                          final picker = ImagePicker();
-
-                          final PickedFile pickedFile = 
-                          await picker.getImage(source: ImageSource.gallery);
-                          if(pickedFile == null){
-                            showDialog(
-                              context: context,
-                              child: AlertDialog(
-                                content: const Text(
-                                  'Nenhuma imagem selecionada'
-                                ),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    onPressed: (){
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: const Text('Ok'),
-                                  ),
-                                ],
-                              )
-                            );
-                            return;
-                          }
-                          final File file = File(pickedFile.path);
-                          final bool sucess = await GallerySaver.saveImage(file.path);
-                          if(sucess){
-                            addImage(file);
-                          } else {
-                            Get.snackbar('Erro', 'Não foi possível salvar');
-                          }
-                        }
+                        Navigator.of(context).pop();
+                        orderController.setLoadingImages();
+                        await saveImage(2);
+                        orderController.setLoadingImages();
                       },
                     ),
                   ],
