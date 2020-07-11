@@ -10,7 +10,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 class AddTileWidget extends StatelessWidget {
 
-  final Function(String) addImage;
+  final Function(File) addImage;
   const AddTileWidget({@required this.addImage});
 
   @override
@@ -90,7 +90,7 @@ class AddTileWidget extends StatelessWidget {
                           final File file = File(pickedFile.path);
                           final bool sucess = await GallerySaver.saveImage(file.path);
                           if(sucess){
-                            addImage(file.path);
+                            addImage(file);
                           } else {
                             Get.snackbar(
                               'Erro',
@@ -164,7 +164,7 @@ class AddTileWidget extends StatelessWidget {
                           final File file = File(pickedFile.path);
                           final bool sucess = await GallerySaver.saveImage(file.path);
                           if(sucess){
-                            addImage(file.path);
+                            addImage(file);
                           } else {
                             Get.snackbar('Erro', 'Não foi possível salvar');
                           }

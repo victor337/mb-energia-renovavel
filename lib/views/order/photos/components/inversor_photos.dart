@@ -6,7 +6,7 @@ import 'package:mbenergiarenovavel/views/order/photos/common/add_tile_widget.dar
 import 'package:mbenergiarenovavel/views/order/photos/common/list_images.dart';
 
 
-class AccountPhotos extends StatelessWidget {
+class InversorPhotos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<OrderController>(
@@ -17,7 +17,7 @@ class AccountPhotos extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
                 child: const Text(
-                  'Conta',
+                  'Inversor',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 22
@@ -30,20 +30,20 @@ class AccountPhotos extends StatelessWidget {
               padding: EdgeInsets.zero,
               shrinkWrap: true,
               crossAxisCount: 4,
-              itemCount: orderController.imagesAccount.length + 1,
+              itemCount: orderController.inversorPhotos.length + 1,
               itemBuilder: (ctx, index){
-                if(index < orderController.imagesAccount.length){
+                if(index < orderController.inversorPhotos.length){
                   return ListImages(
-                    path: orderController.imagesAccount[index],
+                    path: orderController.inversorPhotos[index],
                     index: index,
                     remove: (indexPhoto){
-                      orderController.removeImageAccount(indexPhoto);
+                      orderController.removeinversorPhotos(indexPhoto);
                     }
                   );
                 } else{
                   return AddTileWidget(
                     addImage: (path){
-                      orderController.addImageAccount(path);
+                      orderController.addinversorPhotos(path);
                     },
                   );
                 }

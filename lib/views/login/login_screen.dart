@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mbenergiarenovavel/common/errors/errors.dart';
 import 'package:mbenergiarenovavel/constants/size_screen.dart';
 import 'package:mbenergiarenovavel/controllers/login/login_controller.dart';
 import 'package:mbenergiarenovavel/controllers/user/user_controller.dart';
@@ -11,6 +12,8 @@ class LoginScreen extends StatelessWidget {
   final SizeScreen sizeScreen = SizeScreen();
   final FocusNode focusEmail = FocusNode();
   final FocusNode focusPass = FocusNode();
+
+  final Errors errors = Errors();
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +109,7 @@ class LoginScreen extends StatelessWidget {
                                       onFail: (e){
                                         Get.snackbar(
                                           'Erro',
-                                          e,
+                                          errors.setError(e),
                                           backgroundColor: Colors.red
                                         );
                                       }

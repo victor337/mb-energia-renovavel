@@ -3,7 +3,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:mbenergiarenovavel/controllers/order/order_controller.dart';
 import 'package:mbenergiarenovavel/views/order/photos/common/add_tile_widget.dart';
-import 'package:mbenergiarenovavel/views/order/photos/components/list_images.dart';
+import 'package:mbenergiarenovavel/views/order/photos/common/list_images.dart';
 
 
 class DisjuntorPhotos extends StatelessWidget {
@@ -17,7 +17,7 @@ class DisjuntorPhotos extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
                 child: const Text(
-                  'Fotos do disjuntor',
+                  'Disjuntor',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 22

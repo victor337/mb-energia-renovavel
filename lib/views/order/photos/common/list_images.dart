@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mbenergiarenovavel/controllers/order/order_controller.dart';
@@ -5,9 +7,15 @@ import 'package:mbenergiarenovavel/controllers/order/order_controller.dart';
 
 class ListImages extends StatelessWidget {
 
-  final String path;
+  final File path;
   final int index;
-  const ListImages(this.path, this.index);
+  final Function(int) remove;
+
+  const ListImages({
+    @required this.path,
+    @required this.index,
+    @required this.remove,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +39,7 @@ class ListImages extends StatelessWidget {
                   ),
                   FlatButton(
                     onPressed: (){
-                      orderController.removeImageAccount(index);
+                      remove(index);
                       Navigator.of(context).pop();
                     },
                     child: Text(
@@ -45,7 +53,7 @@ class ListImages extends StatelessWidget {
               ),
             );
           },
-          child: Image.asset(
+          child: Image.file(
             path,
             fit: BoxFit.cover,
           ),

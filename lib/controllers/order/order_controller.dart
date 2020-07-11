@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -111,6 +113,7 @@ class OrderController extends GetxController {
   }
 
   bool isLoading = false;
+  bool imageisLoading = false;
 
   Future<void> getLocal({
     @required Function onFail
@@ -161,10 +164,13 @@ class OrderController extends GetxController {
   typePower == null && typeRoof != null && optionPositioned != null;
 
 
-  List<String> imagesAccount = [];
+  List<File> imagesAccount = [];
 
-  void addImageAccount(String path){
+  void addImageAccount(File path){
+    imageisLoading = true;
+    update();
     imagesAccount.add(path);
+    imageisLoading = false;
     update();
   }
 
@@ -173,10 +179,13 @@ class OrderController extends GetxController {
     update();
   }
 
-  List<String> imagesDisjuntor = [];
+  List<File> imagesDisjuntor = [];
 
-  void addImageDisjuntor(String path){
+  void addImageDisjuntor(File path){
+    imageisLoading = true;
+    update();
     imagesDisjuntor.add(path);
+    imageisLoading = false;
     update();
   }
 
@@ -185,6 +194,78 @@ class OrderController extends GetxController {
     update();
   }
 
-  bool get accountIsValid => imagesAccount.isNotEmpty && imagesDisjuntor.isNotEmpty;
+  List<File> imagesEntry = [];
+
+  void addImagesEntry(File path){
+    imageisLoading = true;
+    update();
+    imagesEntry.add(path);
+    imageisLoading = false;
+    update();
+  }
+
+  void removeImagesEntry(int index){
+    imagesEntry.removeAt(index);
+    update();
+  }
+
+  List<File> inversorPhotos = [];
+
+  void addinversorPhotos(File path){
+    imageisLoading = true;
+    update();
+    inversorPhotos.add(path);
+    imageisLoading = false;
+    update();
+  }
+
+  void removeinversorPhotos(int index){
+    inversorPhotos.removeAt(index);
+    update();
+  }
+
+  List<File> platePhotos = [];
+
+  void addPlatePhotos(File path){
+    imageisLoading = true;
+    update();
+    platePhotos.add(path);
+    imageisLoading = false;
+    update();
+  }
+
+  void removePlatePhotos(int index){
+    platePhotos.removeAt(index);
+    update();
+  }
+
+  bool accountIsValid(){
+    if(index == 0 && imagesAccount.isNotEmpty){
+      return true;
+    } else if(index == 1 && imagesDisjuntor.isNotEmpty){
+      return true;
+    } else if(index == 2 && imagesEntry.isNotEmpty){
+      return true;
+    } else if(index == 3 && inversorPhotos.isNotEmpty){
+      return true;
+    } else if(index == 4 && platePhotos.isNotEmpty){
+      return true;
+    } else{
+      return false;
+    }
+  }
+
+  final PageController pageController = PageController();
+  int index = 0;
+
+  void setPage(int newIndex){
+    index = newIndex;
+    pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.linear
+    );
+    update();
+  }
 
 }
