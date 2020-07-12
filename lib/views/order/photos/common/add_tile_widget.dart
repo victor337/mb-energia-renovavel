@@ -57,6 +57,23 @@ class AddTileWidget extends StatelessWidget {
           pickedFile = await picker.getImage(
             source: ImageSource.camera, imageQuality: 40
           );
+          await GallerySaver.saveImage(pickedFile.path).then((value){
+            if(value){
+              Get.snackbar(
+                'Salvo',
+                'Essa foto foi salva na galeria!',
+                backgroundColor: Colors.green,
+                colorText: Colors.white
+              );
+            } else{
+              Get.snackbar(
+                'Não salvo',
+                'Não foi possível salvar essa imagem na galeria',
+                backgroundColor: Colors.green,
+                colorText: Colors.white
+              );
+            }
+          });
         } else {
           pickedFile = await picker.getImage(
             source: ImageSource.gallery, imageQuality: 40

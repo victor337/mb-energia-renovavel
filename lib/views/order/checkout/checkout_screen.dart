@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mbenergiarenovavel/constants/size_screen.dart';
 import 'package:mbenergiarenovavel/views/order/checkout/components/client_info_card.dart';
+import 'package:mbenergiarenovavel/views/order/checkout/components/create_excel_button.dart';
 import 'package:mbenergiarenovavel/views/order/checkout/components/local_info_card.dart';
 import 'package:mbenergiarenovavel/views/order/checkout/components/photos_info_card.dart';
 import 'package:mbenergiarenovavel/views/order/checkout/components/power_info_card.dart';
@@ -48,6 +49,7 @@ class CheckoutScreen extends StatelessWidget {
             LocalInfoCard(),
             PowerInfoCard(),
             PhotosInfoCard(),
+            CreateExcel(),
           ],
         ),
       ),
