@@ -7,7 +7,7 @@ import 'package:mbenergiarenovavel/views/order/photos/components/disjuntor_scree
 import 'package:mbenergiarenovavel/views/order/photos/components/entry_photos.dart';
 import 'package:mbenergiarenovavel/views/order/photos/components/inversor_photos.dart';
 import 'package:mbenergiarenovavel/views/order/photos/components/plates_photos.dart';
-import 'package:mbenergiarenovavel/views/revision/revision_screen.dart';
+import 'package:mbenergiarenovavel/views/order/checkout/checkout_screen.dart';
 
 
 class MainPhotos extends StatefulWidget {
@@ -134,7 +134,7 @@ class _MainPhotosState extends State<MainPhotos> {
                                     else if(orderController.index == 3){
                                       orderController.setPage(4);
                                     } else if(orderController.index == 4){
-                                      Get.to(RevisionScreen());
+                                      Get.to(CheckoutScreen());
                                     }
                                   } : null ,
                                   child: Container(

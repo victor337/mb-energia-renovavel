@@ -17,7 +17,7 @@ class InversorPhotos extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
                 child: const Text(
-                  'Inversor',
+                  'Local do inversor',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 22

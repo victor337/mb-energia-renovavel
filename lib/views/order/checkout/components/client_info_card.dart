@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mbenergiarenovavel/controllers/order/order_controller.dart';
-import 'package:mbenergiarenovavel/views/revision/common/info_const.dart';
+import 'package:mbenergiarenovavel/views/order/checkout/common/info_const.dart';
 
 
-class PowerInfoCard extends StatelessWidget {
+class ClientInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -15,7 +15,7 @@ class PowerInfoCard extends StatelessWidget {
             return Column(
               children: <Widget>[
                 const Text(
-                  'Dados da usina solar',
+                  'Dados do cliente',
                   style: TextStyle(
                     fontSize: 22
                   ),
@@ -25,15 +25,19 @@ class PowerInfoCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    InfoConst(
-                      title: 'Nome completo',
-                      info: orderController.name,
-                      icon: Icons.person,
+                    Expanded(
+                      child: InfoConst(
+                        title: 'Nome completo',
+                        info: orderController.name,
+                        icon: Icons.person,
+                      ),
                     ),
-                    InfoConst(
-                      title: 'Cidade',
-                      info: orderController.city,
-                      icon: Icons.location_city,
+                    Expanded(
+                      child: InfoConst(
+                        title: 'Cidade',
+                        info: orderController.city,
+                        icon: Icons.location_city,
+                      ),
                     ),
                   ],
                 ),
@@ -41,15 +45,19 @@ class PowerInfoCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    InfoConst(
-                      title: 'Telefone',
-                      info: orderController.phone,
-                      icon: Icons.phone,
+                    Expanded(
+                      child: InfoConst(
+                        title: 'Telefone',
+                        info: orderController.phone,
+                        icon: Icons.phone,
+                      ),
                     ),
-                    InfoConst(
-                      title: 'Observação',
-                      info: orderController.observation??'',
-                      icon: Icons.list,
+                    Expanded(
+                      child: InfoConst(
+                        title: 'Observação',
+                        info: orderController.observation??'',
+                        icon: Icons.list,
+                      ),
                     ),
                   ],
                 ),

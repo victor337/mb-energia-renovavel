@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mbenergiarenovavel/controllers/order/order_controller.dart';
-import 'package:mbenergiarenovavel/views/revision/common/info_const.dart';
+import 'package:mbenergiarenovavel/views/order/checkout/common/info_const.dart';
 
 
 class LocalInfoCard extends StatelessWidget {
@@ -13,6 +13,7 @@ class LocalInfoCard extends StatelessWidget {
         child: GetBuilder<OrderController>(
           builder: (orderController){
             return Column(
+              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 const Text(
                   'Dados do local',
@@ -25,15 +26,19 @@ class LocalInfoCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    InfoConst(
-                      title: 'Tipo',
-                      info: orderController.type,
-                      icon: Icons.local_convenience_store,
+                    Expanded(
+                      child: InfoConst(
+                        title: 'Tipo',
+                        info: orderController.type,
+                        icon: Icons.local_convenience_store,
+                      ),
                     ),
-                    InfoConst(
-                      title: 'Ligação',
-                      info: orderController.ligation,
-                      icon: Icons.format_line_spacing,
+                    Expanded(
+                      child: InfoConst(
+                        title: 'Ligação',
+                        info: orderController.ligation,
+                        icon: Icons.format_line_spacing,
+                      ),
                     ),
                   ],
                 ),
@@ -41,15 +46,19 @@ class LocalInfoCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    InfoConst(
-                      title: 'Disjuntor',
-                      info: orderController.disjutor,
-                      icon: Icons.settings,
+                    Expanded(
+                      child: InfoConst(
+                        title: 'Disjuntor',
+                        info: orderController.disjutor,
+                        icon: Icons.settings,
+                      ),
                     ),
-                    InfoConst(
-                      title: 'Gerador',
-                      info: orderController.generator,
-                      icon: Icons.assignment_late,
+                    Expanded(
+                      child: InfoConst(
+                        title: 'Gerador',
+                        info: orderController.generator,
+                        icon: Icons.assignment_late,
+                      ),
                     ),
                   ],
                 ),
