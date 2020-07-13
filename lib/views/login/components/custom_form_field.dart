@@ -16,6 +16,7 @@ class CustomFormField extends StatelessWidget {
   final List<TextInputFormatter> inputformatters;
   final bool enabled;
   final String initalValue;
+  final Color color;
 
   const CustomFormField(
     {
@@ -31,6 +32,7 @@ class CustomFormField extends StatelessWidget {
       this.obscureText,
       this.setObscure,
       this.inputformatters,
+      this.color,
     }
   );
 
@@ -60,7 +62,7 @@ class CustomFormField extends StatelessWidget {
         decoration: InputDecoration(
           icon: Icon(
             iconData,
-            color: const Color.fromARGB(255, 255, 153, 51),
+            color: color ?? const Color.fromARGB(255, 255, 153, 51),
           ),
           border: InputBorder.none,
           hintText: hintText,

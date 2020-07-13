@@ -13,7 +13,7 @@ class LoginScreen extends StatelessWidget {
   final FocusNode focusEmail = FocusNode();
   final FocusNode focusPass = FocusNode();
 
-  final Errors errors = Errors();
+  final ErrorsFire errors = ErrorsFire();
 
   @override
   Widget build(BuildContext context) {

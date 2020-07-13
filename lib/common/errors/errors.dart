@@ -1,4 +1,4 @@
-class Errors {
+class ErrorsFire {
 
   String setError(String error){
     if(error == 'ERROR_INVALID_EMAIL'){
@@ -13,6 +13,10 @@ class Errors {
       return 'Espere um pouco para tentar novamente';
     } else if(error == 'ERROR_OPERATION_NOT_ALLOWED'){
       return 'O login foi desabilitado';
+    } else if(error == 'ERROR_WEAK_PASSWORD'){
+      return 'Senha muito fraca';
+    } else if(error == 'ERROR_EMAIL_ALREADY_IN_USE'){
+      return 'Este email já está em uso';
     } else{
       return 'Verifique sua conexão com a internet';
     }

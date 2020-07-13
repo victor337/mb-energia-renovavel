@@ -13,6 +13,7 @@ class UserController extends GetxController {
   Firestore firestore = Firestore.instance;
   
   bool isLoading = false;
+  bool isAdmin = false;
 
   Future<void> login({
     @required String email,
@@ -29,12 +30,17 @@ class UserController extends GetxController {
       password: pass,
     ).then((userLogged)async{
       
-      final DocumentSnapshot dataFire = await getData(userLogged.user.uid);
+      final DocumentSnapshot dataFire = await getData('users', userLogged.user.uid);
+      final DocumentSnapshot dataAdmin = await getData('admin', userLogged.user.uid);
 
       final UserModel setUser = UserModel(
         name: dataFire.data["name"] as String,
         email: dataFire.data["email"] as String,
       );
+
+      if(dataAdmin != null){
+        isAdmin = true;
+      }
       
       user = setUser;
       onSucess();
@@ -47,8 +53,8 @@ class UserController extends GetxController {
     });
   }
 
-  Future<DocumentSnapshot> getData(String uid) async{
-    final DocumentSnapshot doc = await firestore.collection("users").document(uid).get();
+  Future<DocumentSnapshot> getData(String colle, String uid) async{
+    final DocumentSnapshot doc = await firestore.collection(colle).document(uid).get();
     return doc;
   }
   

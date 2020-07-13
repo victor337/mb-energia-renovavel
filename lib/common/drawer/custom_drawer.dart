@@ -7,14 +7,17 @@ import 'package:mbenergiarenovavel/models/drawer/drawer_option_model.dart';
 
 
 class CustomDrawer extends GetView {
-  final SizeScreen sizeScreen = SizeScreen();
 
-  final List<DrawerOptionModel> orders = [
-    DrawerOptionModel(Icons.home, 'Início', 0),
-  ];
+  final UserController userController = Get.put(UserController());
+
+  final SizeScreen sizeScreen = SizeScreen();
 
   @override
   Widget build(BuildContext context) {
+    final List<DrawerOptionModel> orders = [
+    DrawerOptionModel(Icons.home, 'Início', 0),if(userController.isAdmin)
+    ...[DrawerOptionModel(Icons.person_add, 'Criar usuário', 1),]
+    ];
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -62,9 +65,32 @@ class CustomDrawer extends GetView {
           ),
           Expanded(
             child: Container(
-              color: const Color.fromARGB(255, 0, 204, 255),
+              color: Theme.of(context).primaryColor,
               child: Column(
                 children: orders.map((e) => DrawerOption(e)).toList(),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: (){
+              Get.offAllNamed('/splash');
+            },
+            child: Container(
+              padding: const EdgeInsets.fromLTRB(20, 15, 0, 15),
+              color: Theme.of(context).primaryColor,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Icon(Icons.exit_to_app, color: Colors.white),
+                  const SizedBox(width: 10,),
+                  const Text(
+                    'Sair',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18
+                    ),
+                  )
+                ],
               ),
             ),
           ),

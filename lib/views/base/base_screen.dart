@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:mbenergiarenovavel/constants/size_screen.dart';
 import 'package:mbenergiarenovavel/controllers/base/base_controller.dart';
 import 'package:mbenergiarenovavel/views/home/home_screen.dart';
+import 'package:mbenergiarenovavel/views/admin/create_user_screen.dart';
 
 
 class BaseScreen extends StatelessWidget {
@@ -18,6 +19,8 @@ class BaseScreen extends StatelessWidget {
           builder: (baseController){
             if(baseController.page == 0){
               return HomeScreen();
+            } else if(baseController.page == 1){
+              return CreateUserScreen();
             }
             return Container();
           }
