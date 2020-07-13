@@ -8,6 +8,33 @@ import 'package:location/location.dart';
 
 class OrderController extends GetxController {
 
+  void cleanAll(){
+    pathsImages.clear();
+    name = null;
+    city = null;
+    phone = null;
+    observation = null;
+    disjutor = null;
+    type = null;
+    ligation = null;
+    meters = null;
+    generator = null;
+    observationLocal = null;
+    typePower = null;
+    typeRoof = null;
+    imagesAccount.clear();
+    imagesDisjuntor.clear();
+    imagesEntry.clear();
+    inversorPhotos.clear();
+    platePhotos.clear();
+    lat = null;
+    long = null;
+    observationPower = null;
+    setPage(0);
+  }
+
+  List<String> pathsImages = [];
+
   String name;
   void setName(String setName){
     name = setName;
@@ -173,11 +200,13 @@ class OrderController extends GetxController {
 
   void addImageAccount(File path){
     imagesAccount.add(path);
+    pathsImages.add(path.path);
     update();
   }
 
   void removeImageAccount(int index){
     imagesAccount.removeAt(index);
+    pathsImages.removeAt(index);
     update();
   }
 
@@ -185,11 +214,13 @@ class OrderController extends GetxController {
 
   void addImageDisjuntor(File path){
     imagesDisjuntor.add(path);
+    pathsImages.add(path.path);
     update();
   }
 
   void removeImageDisjuntor(int index){
     imagesDisjuntor.removeAt(index);
+    pathsImages.removeAt(index);
     update();
   }
 
@@ -197,11 +228,13 @@ class OrderController extends GetxController {
 
   void addImagesEntry(File path){
     imagesEntry.add(path);
+    pathsImages.add(path.path);
     update();
   }
 
   void removeImagesEntry(int index){
     imagesEntry.removeAt(index);
+    pathsImages.removeAt(index);
     update();
   }
 
@@ -209,11 +242,13 @@ class OrderController extends GetxController {
 
   void addinversorPhotos(File path){
     inversorPhotos.add(path);
+    pathsImages.add(path.path);
     update();
   }
 
   void removeinversorPhotos(int index){
     inversorPhotos.removeAt(index);
+    pathsImages.removeAt(index);
     update();
   }
 
@@ -221,11 +256,13 @@ class OrderController extends GetxController {
 
   void addPlatePhotos(File path){
     platePhotos.add(path);
+    pathsImages.add(path.path);
     update();
   }
 
   void removePlatePhotos(int index){
     platePhotos.removeAt(index);
+    pathsImages.removeAt(index);
     update();
   }
 

@@ -44,7 +44,7 @@ class PowerInfoCard extends StatelessWidget {
                       child: InfoConst(
                         title: 'Posição',
                         info: orderController.optionPositioned,
-                        icon: Icons.location_city,
+                        icon: Icons.brightness_7,
                       ),
                     ),
                   ],
@@ -63,7 +63,7 @@ class PowerInfoCard extends StatelessWidget {
                     Expanded(
                       child: InfoConst(
                         title: 'Observação',
-                        info: orderController.observation??'',
+                        info: orderController.observationPower??'',
                         icon: Icons.list,
                       ),
                     ),

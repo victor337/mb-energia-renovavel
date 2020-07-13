@@ -121,7 +121,7 @@ class SolarPowerScreen extends StatelessWidget {
                     CustomFormField(
                       focusNode: focusMeters,
                       onChanged: (meters){
-                        orderController.setDis(meters);
+                        orderController.setMeters(meters);
                       },
                       hintText: 'M²',
                       onFieldSubmitted: (meters){

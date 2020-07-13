@@ -15,6 +15,7 @@ class CheckoutController extends GetxController {
   bool isLoading = false;
 
   Future<void> generateExcel({
+    @required List<String> images,
     @required String path,
     @required PersonData personData,
     @required LocalDataModel localData,
@@ -118,16 +119,21 @@ class CheckoutController extends GetxController {
       excel.updateCell(
         sheetObject.sheetName,
         CellIndex.indexByString("E4"),
-        localData.disjuntor
+        localData.ligation
       );
       excel.updateCell(
         sheetObject.sheetName,
         CellIndex.indexByString("E5"),
-        localData.generate
+        localData.disjuntor
       );
       excel.updateCell(
         sheetObject.sheetName,
         CellIndex.indexByString("E6"),
+        localData.generate
+      );
+      excel.updateCell(
+        sheetObject.sheetName,
+        CellIndex.indexByString("E7"),
         localData.obs
       );
 
@@ -207,23 +213,35 @@ class CheckoutController extends GetxController {
           ..writeAsBytesSync(onValue);
         });
         onSucess();
-        isLoading = false;
+        images.add("$path/planilha_${personData.name}.xlsx");
         final Email email = Email(
-          body: 'Cliente: ${personData.name}\nVendedor: Victor\nData: ${DateTime.now().toString()}',
+          body: 'Cliente: ${personData.name}\nVendedor: Victor\nData: ${setDate(DateTime.now().toString())}',
           subject: 'Projeto ${personData.name}',
-          recipients: ['victorhspb17@gmail.com'],
+          recipients: ['mberorcamento@gmail.com'],
           cc: ['victorhspb18@gmail.com'],
           bcc: [],
-          attachmentPaths: ["$path/planilha_${personData.name}.xlsx"],
+          attachmentPaths: images,
           isHTML: false,
         );
-        await FlutterEmailSender.send(email);
+        isLoading = false;
+        Future.delayed(const Duration(seconds: 1)).then((value)async{
+          await FlutterEmailSender.send(email);
+        });
         update();
       } catch (e){
         onFail();
         isLoading = false;
         update();
       }
+    }
+
+
+    String setDate(String date){
+      final String year = date.substring(0, 4);
+      final String month = date.substring(6, 7);
+      final String day = date.substring(9, 10);
+      final String hrs = date.substring(11, 16);
+      return '$day/$month/$year, ${hrs}hrs';
     }
 }
 
