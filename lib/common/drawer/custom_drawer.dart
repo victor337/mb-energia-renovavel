@@ -15,8 +15,10 @@ class CustomDrawer extends GetView {
   @override
   Widget build(BuildContext context) {
     final List<DrawerOptionModel> orders = [
-    DrawerOptionModel(Icons.home, 'Início', 0),if(userController.isAdmin)
-    ...[DrawerOptionModel(Icons.person_add, 'Criar usuário', 1),]
+    DrawerOptionModel(Icons.home, 'Início', 0),
+    if(userController.isAdmin)...[
+      DrawerOptionModel(Icons.person_add, 'Criar usuário', 1),
+    ]
     ];
     return Drawer(
       child: Column(
@@ -73,6 +75,7 @@ class CustomDrawer extends GetView {
           ),
           GestureDetector(
             onTap: (){
+              userController.singOut();
               Get.offAllNamed('/splash');
             },
             child: Container(

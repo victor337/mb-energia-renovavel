@@ -15,6 +15,12 @@ class UserController extends GetxController {
   bool isLoading = false;
   bool isAdmin = false;
 
+  Future<void> singOut() async{
+    isAdmin = false;
+    await auth.signOut();
+    user = null;
+  }
+
   Future<void> login({
     @required String email,
     @required String pass,
@@ -31,14 +37,15 @@ class UserController extends GetxController {
     ).then((userLogged)async{
       
       final DocumentSnapshot dataFire = await getData('users', userLogged.user.uid);
-      final DocumentSnapshot dataAdmin = await getData('admin', userLogged.user.uid);
+      final DocumentSnapshot dataAdmin = await getData('admins', userLogged.user.uid);
 
       final UserModel setUser = UserModel(
         name: dataFire.data["name"] as String,
         email: dataFire.data["email"] as String,
       );
 
-      if(dataAdmin != null){
+      if(dataAdmin.exists){
+        print(dataAdmin.data);
         isAdmin = true;
       }
       

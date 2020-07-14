@@ -42,90 +42,78 @@ class CreateUserScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Card(
-                      elevation: 8,
-                      color: const Color.fromARGB(255, 255, 204, 0),
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                        child: Column(
-                          children: <Widget>[
-                            CustomFormField(
-                              focusNode: focusName,
-                              onChanged: (name){
-                                createUser.setName(name);
-                              },
-                              hintText: 'Nome',
-                              onFieldSubmitted: (name){
-                                focusName.unfocus();
-                                FocusScope.of(context).requestFocus(focusEmail);
-                              },
-                              textInputAction: TextInputAction.next,
-                              keyBoardType: TextInputType.text,
-                              iconData: Icons.person,
-                              enabled: true,
-                              initalValue: createUser.name,
-                              color: const Color.fromARGB(255, 255, 204, 0),
-                            ),
-                            CustomFormField(
-                              focusNode: focusEmail,
-                              onChanged: (email){
-                                createUser.setEmail(email);
-                              },
-                              hintText: 'Email',
-                              onFieldSubmitted: (email){
-                                focusEmail.unfocus();
-                                FocusScope.of(context).requestFocus(focusPass);
-                              },
-                              textInputAction: TextInputAction.next,
-                              keyBoardType: TextInputType.emailAddress,
-                              iconData: Icons.mail,
-                              enabled: true,
-                              initalValue: createUser.email,
-                              color: const Color.fromARGB(255, 255, 204, 0),
-                            ),
-                            CustomFormField(
-                              focusNode: focusPass,
-                              onChanged: (pass){
-                                createUser.setPass(pass);
-                              },
-                              hintText: 'Senha',
-                              onFieldSubmitted: (pass){
-                                focusPass.unfocus();
-                              },
-                              textInputAction: TextInputAction.done,
-                              keyBoardType: TextInputType.visiblePassword,
-                              iconData: Icons.lock,
-                              enabled: true,
-                              initalValue: createUser.pass,
-                              color: const Color.fromARGB(255, 255, 204, 0),
-                            ),
-                            Row(
-                              children: <Widget>[
-                                Checkbox(
-                                  activeColor: Colors.orange,
-                                  value: createUser.isAdmin,
-                                  onChanged: (v){
-                                    createUser.setAdmin();
-                                  },
-                                ),
-                                const Text(
-                                  'Administrador',
-                                  style: TextStyle(
-                                    color: Colors.white
-                                  ),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
+                    CustomFormField(
+                      focusNode: focusName,
+                      onChanged: (name){
+                        createUser.setName(name);
+                      },
+                      hintText: 'Nome',
+                      onFieldSubmitted: (name){
+                        focusName.unfocus();
+                        FocusScope.of(context).requestFocus(focusEmail);
+                      },
+                      textInputAction: TextInputAction.next,
+                      keyBoardType: TextInputType.text,
+                      iconData: Icons.person,
+                      enabled: true,
+                      initalValue: createUser.name,
+                      color: const Color.fromARGB(255, 255, 153, 51,),
                     ),
-                    const SizedBox(width: 40,),
+                    CustomFormField(
+                      focusNode: focusEmail,
+                      onChanged: (email){
+                        createUser.setEmail(email);
+                      },
+                      hintText: 'Email',
+                      onFieldSubmitted: (email){
+                        focusEmail.unfocus();
+                        FocusScope.of(context).requestFocus(focusPass);
+                      },
+                      textInputAction: TextInputAction.next,
+                      keyBoardType: TextInputType.emailAddress,
+                      iconData: Icons.mail,
+                      enabled: true,
+                      initalValue: createUser.email,
+                      color: const Color.fromARGB(255, 255, 153, 51,),
+                    ),
+                    CustomFormField(
+                      focusNode: focusPass,
+                      onChanged: (pass){
+                        createUser.setPass(pass);
+                      },
+                      hintText: 'Senha',
+                      onFieldSubmitted: (pass){
+                        focusPass.unfocus();
+                      },
+                      textInputAction: TextInputAction.done,
+                      keyBoardType: TextInputType.visiblePassword,
+                      iconData: Icons.lock,
+                      enabled: true,
+                      initalValue: createUser.pass,
+                      color: const Color.fromARGB(255, 255, 153, 51,),
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Checkbox(
+                          activeColor: Colors.orange,
+                          value: createUser.isAdmin,
+                          onChanged: (v){
+                            createUser.setAdmin();
+                          },
+                        ),
+                        const Text(
+                          'Administrador',
+                          style: TextStyle(
+                            color: Colors.white
+                          ),
+                        )
+                      ],
+                    ),
                     GetBuilder<AdminController>(
                       init: AdminController(),
                       builder: (adminController){
                         return RaisedButton(
-                          color: const Color.fromARGB(255, 255, 204, 0),
+                          color: const Color.fromARGB(255, 255, 255, 0),
                           onPressed: !adminController.isLoading ? (){
                             adminController.createUser(
                               email: createUser.email,
@@ -160,7 +148,7 @@ class CreateUserScreen extends StatelessWidget {
                             const Text(
                               'Criar usuário',
                               style: TextStyle(
-                                color: Colors.white
+                                color: Colors.black
                               ),
                             ),
                           ),
