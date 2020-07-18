@@ -12,6 +12,7 @@ class UserController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   Firestore firestore = Firestore.instance;
   
+  
   bool isLoading = false;
   bool isAdmin = false;
 
@@ -45,7 +46,6 @@ class UserController extends GetxController {
       );
 
       if(dataAdmin.exists){
-        print(dataAdmin.data);
         isAdmin = true;
       }
       

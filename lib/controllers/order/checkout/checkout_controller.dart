@@ -206,6 +206,8 @@ class CheckoutController extends GetxController {
         powerData.obs,
       );
 
+      excel.delete('Sheet1');
+
       try {
         excel.encode().then((onValue){
           File(join("$path/planilha_${personData.name}.xlsx"))
