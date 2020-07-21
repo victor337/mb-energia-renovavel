@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mbenergiarenovavel/controllers/order/checkout/checkout_controller.dart';
 import 'package:mbenergiarenovavel/controllers/order/order_controller.dart';
+import 'package:mbenergiarenovavel/controllers/user/user_controller.dart';
 import 'package:mbenergiarenovavel/models/client/local_data_model.dart';
 import 'package:mbenergiarenovavel/models/client/person_data_model.dart';
 import 'package:mbenergiarenovavel/models/client/power_data_model.dart';
@@ -12,6 +13,9 @@ import 'package:permission_handler/permission_handler.dart';
 
 
 class CreateExcel extends StatelessWidget {
+
+  final UserController userController = Get.put(UserController());
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<OrderController>(
@@ -25,108 +29,71 @@ class CreateExcel extends StatelessWidget {
                   child: RaisedButton(
                     color: Colors.blue,
                     onPressed: () async{
-                      Get.dialog(
-                        AlertDialog(
-                          title: const Text(
-                            'Atenção!',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold
-                            ),
-                          ),
-                          content: const Text(
-                            'Após o envio dos dados os mesmos são apagados do App\n\n'
-                            'Você tem certeza?'
-                          ),
-                          actions: <Widget>[
-                            FlatButton(
-                              onPressed: (){
-                                Get.back();
-                              },
-                              child: const Text(
-                                'Cancelar',
-                                style: TextStyle(
-                                  color: Colors.blue
-                                ),
-                              ),
-                            ),
-                            FlatButton(
-                              onPressed: () async{
-                                Get.back();
-                                await PermissionHandler().requestPermissions([
-                                  PermissionGroup.storage,
-                                ]);
+                      await PermissionHandler().requestPermissions([
+                        PermissionGroup.storage,
+                      ]);
 
-                              final PermissionStatus permissionStorage = await PermissionHandler()
-                                .checkPermissionStatus(PermissionGroup.storage);
-                                
-                              if(permissionStorage != PermissionStatus.granted){
-                                return Get.snackbar(
-                                  'Erro',
-                                  'É necessário permirtir para executar essa função',
-                                );
-                              } else{
-                                final Directory externalDir = await getExternalStorageDirectory();
-                                final String externalDirPath = externalDir.path;
+                      final PermissionStatus permissionStorage = await PermissionHandler()
+                        .checkPermissionStatus(PermissionGroup.storage);
+                        
+                      if(permissionStorage != PermissionStatus.granted){
+                        return Get.snackbar(
+                          'Erro',
+                          'É necessário permirtir para executar essa função',
+                        );
+                      } else{
+                        final Directory externalDir = await getExternalStorageDirectory();
+                        final String externalDirPath = externalDir.path;
 
-                                final PersonData personData = PersonData(
-                                  name: orderController.name,
-                                  city: orderController.city,
-                                  phone: orderController.phone,
-                                  obs: orderController.observation
-                                );
+                        final PersonData personData = PersonData(
+                          name: orderController.name,
+                          city: orderController.city,
+                          phone: orderController.phone,
+                          obs: orderController.observation
+                        );
 
-                                final LocalDataModel localData = LocalDataModel(
-                                  type: orderController.type,
-                                  ligation: orderController.ligation,
-                                  disjuntor: orderController.disjutor,
-                                  generate: orderController.generator,
-                                  obs: orderController.observationLocal
-                                );
+                        final LocalDataModel localData = LocalDataModel(
+                          type: orderController.type,
+                          ligation: orderController.ligation,
+                          disjuntor: orderController.disjutor,
+                          generate: orderController.generator,
+                          obs: orderController.observationLocal
+                        );
 
-                                final PowerData powerData = PowerData(
-                                  type: orderController.typePower,
-                                  typeRoof: orderController.typeRoof??'',
-                                  pos: orderController.optionPositioned,
-                                  meters: orderController.meters,
-                                  location: '${orderController.lat},${orderController.long}',
-                                  obs: orderController.observationPower
-                                );
+                        final PowerData powerData = PowerData(
+                          type: orderController.typePower,
+                          typeRoof: orderController.typeRoof??'',
+                          pos: orderController.optionPositioned,
+                          meters: orderController.meters,
+                          location: '${orderController.lat},${orderController.long}',
+                          obs: orderController.observationPower
+                        );
 
-                                checkoutController.generateExcel(
-                                  images: orderController.pathsImages,
-                                  path: externalDirPath,
-                                  personData: personData,
-                                  localData: localData,
-                                  powerData: powerData,
-                                  onSucess: (){
-                                    Get.snackbar(
-                                      'Salvo',
-                                      'Você será redirecionado para o envio do email',
-                                      backgroundColor: Colors.green,
-                                      colorText: Colors.white
-                                    );
-                                  },
-                                  onFail: (){
-                                    Get.snackbar(
-                                      'Erro',
-                                      'Não foi possível salvar',
-                                      backgroundColor: Colors.red,
-                                      colorText: Colors.white
-                                    );
-                                  }
-                                );                      
-                              }
-                              },
-                              child: const Text(
-                                'Ok',
-                                style: TextStyle(
-                                  color: Colors.red
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      );
+                        checkoutController.generateExcel(
+                          userModel: userController.user,
+                          images: orderController.pathsImages,
+                          path: externalDirPath,
+                          personData: personData,
+                          localData: localData,
+                          powerData: powerData,
+                          onSucess: (){
+                            Get.snackbar(
+                              'Salvo',
+                              'Você será redirecionado para o envio do email',
+                              backgroundColor: Colors.green,
+                              colorText: Colors.white
+                            );
+                          },
+                          onFail: (){
+                            Get.snackbar(
+                              'Erro',
+                              'Não foi possível salvar',
+                              backgroundColor: Colors.red,
+                              colorText: Colors.white
+                            );
+                          }
+                        );                      
+                      }
                     },
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),

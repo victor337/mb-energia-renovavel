@@ -266,21 +266,21 @@ class OrderController extends GetxController {
     update();
   }
 
-  bool accountIsValid(){
-    if(index == 0 && imagesAccount.isNotEmpty){
-      return true;
-    } else if(index == 1 && imagesDisjuntor.isNotEmpty){
-      return true;
-    } else if(index == 2 && imagesEntry.isNotEmpty){
-      return true;
-    } else if(index == 3 && inversorPhotos.isNotEmpty){
-      return true;
-    } else if(index == 4 && platePhotos.isNotEmpty){
-      return true;
-    } else{
-      return false;
-    }
-  }
+  // bool accountIsValid(){
+  //   if(index == 0 && imagesAccount.isNotEmpty){
+  //     return true;
+  //   } else if(index == 1 && imagesDisjuntor.isNotEmpty){
+  //     return true;
+  //   } else if(index == 2 && imagesEntry.isNotEmpty){
+  //     return true;
+  //   } else if(index == 3 && inversorPhotos.isNotEmpty){
+  //     return true;
+  //   } else if(index == 4 && platePhotos.isNotEmpty){
+  //     return true;
+  //   } else{
+  //     return false;
+  //   }
+  // }
 
   final PageController pageController = PageController();
   int index = 0;

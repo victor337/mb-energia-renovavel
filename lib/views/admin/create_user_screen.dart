@@ -95,7 +95,7 @@ class CreateUserScreen extends StatelessWidget {
                     Row(
                       children: <Widget>[
                         Checkbox(
-                          activeColor: Colors.orange,
+                          activeColor: Colors.yellow,
                           value: createUser.isAdmin,
                           onChanged: (v){
                             createUser.setAdmin();

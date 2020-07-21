@@ -121,7 +121,7 @@ class _MainPhotosState extends State<MainPhotos> {
                               Expanded(
                                 child: RaisedButton(
                                   color: const Color.fromARGB(255, 255, 153, 51,),
-                                  onPressed: orderController.accountIsValid() ? (){
+                                  onPressed: (){
                                     if(orderController.index == 0){
                                       orderController.setPage(1);
                                     }
@@ -136,16 +136,15 @@ class _MainPhotosState extends State<MainPhotos> {
                                     } else if(orderController.index == 4){
                                       Get.to(CheckoutScreen());
                                     }
-                                  } : null ,
+                                  },
                                   child: Container(
                                     padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                                     width: sizeScreen.getWidthScreen(context),
                                     child: Text(
                                       orderController.index < 4 ? 'Continuar' : 'Revisar',
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: orderController.accountIsValid() ? 
-                                        Colors.white : Colors.black,
+                                      style: const TextStyle(
+                                        color: Colors.white,
                                         fontSize: 20
                                       ),
                                     ),

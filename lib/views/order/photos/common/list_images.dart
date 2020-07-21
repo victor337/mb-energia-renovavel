@@ -42,7 +42,7 @@ class ListImages extends StatelessWidget {
                       remove(index);
                       Navigator.of(context).pop();
                     },
-                    child: Text(
+                    child: const Text(
                       'Remover',
                       style: TextStyle(
                         color: Colors.red

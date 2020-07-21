@@ -32,28 +32,30 @@ class CustomDrawer extends GetView {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          userController.user.name,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 25
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            userController.user.name,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 25
+                            ),
                           ),
-                        ),
-                        Text(
-                          userController.user.email,
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 18
+                          Text(
+                            userController.user.email,
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 16
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     Container(
-                      height: sizeScreen.getHeightScreen(context) / 10,
-                      width: sizeScreen.getWidthScreen(context) / 3,
+                      height: sizeScreen.getHeightScreen(context) / 12,
+                      width: sizeScreen.getWidthScreen(context) / 4,
                       child: const FadeInImage(
                         placeholder: AssetImage('assets/transparent.png'),
                         image: AssetImage('assets/icon-mb.png'),

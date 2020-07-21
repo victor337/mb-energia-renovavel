@@ -15,7 +15,7 @@ class LocalData extends StatelessWidget {
   final FocusNode focusObs = FocusNode();
 
   final List<String> optionsType = 
-    ['Selecione', 'Industria', 'Empresa', 'Residência', 'Granja', 'Sítio', 'Fazenda;'];
+    ['Selecione', 'Industria', 'Empresa', 'Residência', 'Granja', 'Sítio', 'Fazenda'];
 
   final List<String> optionsLigation = 
     ['Selecione', 'Mono', 'Bifásico', 'Trifásico', 'Grupo A'];
@@ -119,7 +119,7 @@ class LocalData extends StatelessWidget {
                       },
                       initalValue: orderController.disjutor??'',
                       textInputAction: TextInputAction.next,
-                      keyBoardType: TextInputType.text,
+                      keyBoardType: TextInputType.number,
                       iconData: Icons.settings,
                       enabled: null
                     ),
