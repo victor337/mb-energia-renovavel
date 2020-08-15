@@ -21,7 +21,7 @@ class DropDown extends StatelessWidget {
       children: <Widget>[
         Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 18
           ),

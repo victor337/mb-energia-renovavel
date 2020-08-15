@@ -40,6 +40,7 @@ class CreateUserScreen extends StatelessWidget {
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  // ignore: avoid_redundant_argument_values
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     CustomFormField(

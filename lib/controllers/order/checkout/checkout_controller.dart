@@ -438,18 +438,15 @@ class CheckoutController extends GetxController {
         onSucess();
         images.add("$path/planilha_${personData.name}.xlsx");
         final Email email = Email(
-          body: 'Cliente: ${personData.name}\nVendedor: Victor\nData: ${setDate(DateTime.now().toString())}',
+          body: 'Cliente: ${personData.name}\nVendedor: ${userModel.name}\nData: ${setDate(DateTime.now().toString())}',
           subject: 'Projeto ${personData.name}',
           recipients: ['mberorcamento@gmail.com'],
-          cc: ['victorhspb18@gmail.com'],
+          cc: [],
           bcc: [],
           attachmentPaths: images,
-          isHTML: false,
         );
         isLoading = false;
-        Future.delayed(const Duration(seconds: 1)).then((value)async{
-          await FlutterEmailSender.send(email);
-        });
+        await FlutterEmailSender.send(email);
         update();
       } catch (e){
         onFail();

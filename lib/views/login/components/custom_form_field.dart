@@ -46,6 +46,7 @@ class CustomFormField extends StatelessWidget {
         color: const Color.fromARGB(100, 255, 255, 255)
       ),
       child: TextFormField(
+        obscureText: obscureText??false,
         enabled: enabled,
         focusNode: focusNode,
         onChanged: onChanged,
@@ -53,8 +54,7 @@ class CustomFormField extends StatelessWidget {
         textInputAction: textInputAction,
         initialValue: initalValue,
         keyboardType: keyBoardType,
-        obscureText: false,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.black
         ),
         cursorColor: Colors.white,

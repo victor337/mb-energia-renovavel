@@ -17,6 +17,7 @@ class InfoConst extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+      // ignore: avoid_redundant_argument_values
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Icon(

@@ -45,7 +45,7 @@ class CustomDrawer extends GetView {
                           ),
                           Text(
                             userController.user.email,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.grey,
                               fontSize: 16
                             ),
@@ -84,11 +84,10 @@ class CustomDrawer extends GetView {
               padding: const EdgeInsets.fromLTRB(20, 15, 0, 15),
               color: Theme.of(context).primaryColor,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
+                children: const <Widget>[
                   Icon(Icons.exit_to_app, color: Colors.white),
-                  const SizedBox(width: 10,),
-                  const Text(
+                  SizedBox(width: 10,),
+                  Text(
                     'Sair',
                     style: TextStyle(
                       color: Colors.white,

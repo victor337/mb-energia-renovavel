@@ -15,6 +15,12 @@ class LoginController extends GetxController {
     update();
   }
 
+  bool obscuretext = true;
+  void setObscure(){
+    obscuretext = !obscuretext;
+    update();
+  }
+
 
   bool get isValid => email != null && email != '' &&
     pass != null && pass != '' && pass.length >= 6;

@@ -21,11 +21,11 @@ class HomeScreen extends StatelessWidget {
       ),
       drawer: CustomDrawer(),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: const [
+            colors: [
               Color.fromARGB(255, 255, 153, 51,),
               Color.fromARGB(255, 255, 204, 0),
             ]
@@ -41,9 +41,9 @@ class HomeScreen extends StatelessWidget {
                   duration: const Duration(milliseconds: 250),
                 );
               },
-              leading: Icon(
+              leading: const Icon(
                 Icons.person_add,
-                color: const Color.fromARGB(255, 153, 204, 102),
+                color: Color.fromARGB(255, 153, 204, 102),
               ),
               title: const Text(
                 'Novo cliente',
@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
               subtitle: const Text(
                 'Adicionar novo cliente e enviar a planilha por email',
               ),
-              trailing: Icon(Icons.arrow_right),
+              trailing: const Icon(Icons.arrow_right),
             ),
           ),
         ),

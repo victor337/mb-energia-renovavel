@@ -38,6 +38,7 @@ class LoginScreen extends StatelessWidget {
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              // ignore: avoid_redundant_argument_values
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
@@ -79,9 +80,10 @@ class LoginScreen extends StatelessWidget {
                                   textInputAction: TextInputAction.next,
                                   keyBoardType: TextInputType.emailAddress,
                                   iconData: Icons.email,
-                                  initalValue: '',
+                                  initalValue: loginController.email,
                                 ),
                                 CustomFormField(
+                                  obscureText: loginController.obscuretext,
                                   focusNode: focusPass,
                                   onChanged: (pass){
                                     loginController.setPass(pass);
@@ -93,8 +95,24 @@ class LoginScreen extends StatelessWidget {
                                   enabled: !userController.isLoading,
                                   textInputAction: TextInputAction.done,
                                   keyBoardType: TextInputType.visiblePassword,
-                                  iconData: Icons.email,
-                                  initalValue: '',
+                                  iconData: Icons.lock,
+                                  initalValue: loginController.pass,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    RaisedButton(
+                                      color: loginController.obscuretext ? Colors.red : Colors.blue,
+                                      onPressed: loginController.setObscure,
+                                      child: Text(
+                                        loginController.obscuretext ? 'Exibir senha' : 'Ocultar senha',
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(
+                                          color: Colors.white
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 const SizedBox(height: 20,),
                                 RaisedButton(

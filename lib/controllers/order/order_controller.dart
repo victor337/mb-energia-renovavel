@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:location/location.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 
 
 class OrderController extends GetxController {
@@ -166,28 +167,29 @@ class OrderController extends GetxController {
         return;
       }
     }
-    await PermissionHandler().requestPermissions([
-      PermissionGroup.location
-    ]);
+    await Permission.location.request();
 
-     PermissionHandler().checkPermissionStatus(
-      PermissionGroup.storage
-    ).then((value)async{
 
+    if(await Permission.location.request().isDenied){
+      return Get.snackbar(
+        'Erro',
+        'É necessário permirtir para executar essa função',
+      );
+    }
+
+    try {
       _locationData = await location.getLocation();
       setLat(_locationData.latitude.toString());
       setLong(_locationData.longitude.toString());
 
       isLoading = false;
       update();
-
-    }).catchError((e){
-
+    } catch (e) {
       isLoading = false;
       onFail();
       update();
-
-    });
+    }
+  
   }
 
   bool get powerIsValid => typePower != 'Selecione' &&  optionPositioned != 'Selecione' &&

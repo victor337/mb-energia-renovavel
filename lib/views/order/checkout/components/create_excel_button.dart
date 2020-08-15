@@ -29,14 +29,9 @@ class CreateExcel extends StatelessWidget {
                   child: RaisedButton(
                     color: Colors.blue,
                     onPressed: () async{
-                      await PermissionHandler().requestPermissions([
-                        PermissionGroup.storage,
-                      ]);
-
-                      final PermissionStatus permissionStorage = await PermissionHandler()
-                        .checkPermissionStatus(PermissionGroup.storage);
+                      await Permission.storage.request();
                         
-                      if(permissionStorage != PermissionStatus.granted){
+                      if(await Permission.storage.request().isDenied){
                         return Get.snackbar(
                           'Erro',
                           'É necessário permirtir para executar essa função',

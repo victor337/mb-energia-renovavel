@@ -49,11 +49,11 @@ class SolarPowerScreen extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(15, 25, 15, 0),
           height: sizeScreen.getHeightScreenWidthAppBar(context, AppBar()),
           width: sizeScreen.getWidthScreen(context),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: const [
+              colors: [
                 Color.fromARGB(255, 255, 153, 51,),
                 Color.fromARGB(255, 255, 204, 0),
               ]
@@ -65,6 +65,7 @@ class SolarPowerScreen extends StatelessWidget {
               builder: (orderController){
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  // ignore: avoid_redundant_argument_values
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Card(

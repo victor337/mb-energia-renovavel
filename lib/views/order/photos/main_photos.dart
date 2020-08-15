@@ -52,11 +52,11 @@ class _MainPhotosState extends State<MainPhotos> {
           padding: const EdgeInsets.fromLTRB(15, 25, 15, 0),
           height: sizeScreen.getHeightScreenWidthAppBar(context, AppBar()),
           width: sizeScreen.getWidthScreen(context),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: const [
+              colors: [
                 Color.fromARGB(255, 255, 153, 51,),
                 Color.fromARGB(255, 255, 204, 0),
               ]
@@ -83,13 +83,14 @@ class _MainPhotosState extends State<MainPhotos> {
                       width: sizeScreen.getWidthScreen(context),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
+                        // ignore: avoid_redundant_argument_values
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Visibility(
                             visible: orderController.imageisLoading,
-                            child: LinearProgressIndicator(
+                            child: const LinearProgressIndicator(
                               backgroundColor: Colors.orange,
-                              valueColor: const AlwaysStoppedAnimation(Colors.white),
+                              valueColor: AlwaysStoppedAnimation(Colors.white),
                             ),
                           ),
                           Row(

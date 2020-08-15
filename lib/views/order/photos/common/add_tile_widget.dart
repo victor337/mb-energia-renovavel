@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mbenergiarenovavel/controllers/order/order_controller.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:mbenergiarenovavel/controllers/order/order_controller.dart';
 
 
 class AddTileWidget extends StatelessWidget {
@@ -18,20 +18,12 @@ class AddTileWidget extends StatelessWidget {
 
     Future<void> saveImage(int font)async{
 
-      await PermissionHandler().requestPermissions([
-        PermissionGroup.camera,
-        PermissionGroup.storage,
-      ]);
+      await Permission.camera.request();
+      await Permission.storage.request();
 
-      final PermissionStatus permissionStorage = await PermissionHandler()
-        .checkPermissionStatus(PermissionGroup.storage);
-      
-      final PermissionStatus permissionCamera = await PermissionHandler()
-        .checkPermissionStatus(PermissionGroup.camera,);
-
-      if(permissionStorage != PermissionStatus.granted||
-        permissionCamera != PermissionStatus.granted){
-          showDialog(
+      if(await Permission.camera.request().isDenied ||
+        await Permission.storage.request().isDenied ){
+          return showDialog(
             context: context,
             child: AlertDialog(
               content: const Text(
@@ -47,7 +39,6 @@ class AddTileWidget extends StatelessWidget {
               ],
             )
           );
-          return;
       } else {
         final picker = ImagePicker();
 
@@ -81,7 +72,7 @@ class AddTileWidget extends StatelessWidget {
         }
         
         if(pickedFile == null){
-          showDialog(
+          return showDialog(
             context: context,
             child: AlertDialog(
               content: const Text(
@@ -97,20 +88,9 @@ class AddTileWidget extends StatelessWidget {
               ],
             )
           );
-          return;
         }
         final File file = File(pickedFile.path);
-        final bool sucess = await GallerySaver.saveImage(file.path);
-        if(sucess){
-          addImage(file);
-        } else {
-          Get.snackbar(
-            'Erro',
-            'Não foi possível salvar a imagem',
-            backgroundColor: Colors.red
-          );
-        }
-        
+        addImage(file);
       }
 
     }
@@ -129,7 +109,7 @@ class AddTileWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     IconButton(
-                      icon: Icon(Icons.photo_camera),
+                      icon: const Icon(Icons.photo_camera),
                       onPressed: ()async{
                         Navigator.of(context).pop();
                         orderController.setLoadingImages();
@@ -138,7 +118,7 @@ class AddTileWidget extends StatelessWidget {
                       },
                     ),
                     IconButton(
-                      icon: Icon(Icons.photo_album),
+                      icon: const Icon(Icons.photo_album),
                       onPressed: ()async{
                         Navigator.of(context).pop();
                         orderController.setLoadingImages();
@@ -156,7 +136,7 @@ class AddTileWidget extends StatelessWidget {
               color: const Color.fromARGB(230, 255, 153, 51,),
               borderRadius: BorderRadius.circular(10)
             ),
-            child: Icon(Icons.add, color: Colors.white,),
+            child: const Icon(Icons.add, color: Colors.white,),
           ),
         );
       },

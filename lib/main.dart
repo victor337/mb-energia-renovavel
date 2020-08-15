@@ -31,6 +31,7 @@ void main() {
           ]
         ),
       ],
+      defaultTransition: Transition.topLevel,
       theme: ThemeData(
         primaryColor: const Color.fromARGB(255, 44, 50, 84),
         fontFamily: 'Nunito'
